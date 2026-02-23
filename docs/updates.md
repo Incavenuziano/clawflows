@@ -2,6 +2,7 @@
 
 ## Sun, Feb 22
 
+- 🍌 **Custom vs Community in list** — `clawflows list` now separates your custom workflows from community ones! Your bananas go in one basket, the community's in another. No more guessing which workflows are yours.
 - 🔗 **Fixed rogue workflow creation** — The creating-workflows guide was telling agents to drop workflows straight into `workflows/enabled/` like a banana without a peel. Now it correctly says to use `clawflows create`, which puts them in `custom/` and symlinks them like a civilized minion.
 
 ## Thu, Feb 19

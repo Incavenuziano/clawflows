@@ -376,11 +376,13 @@ $description
 cmd_list() {
   local filter="${1:-all}"
   local name dir found=false
-  local enabled_lines=()
-  local available_lines=()
+  local custom_enabled=()
+  local custom_available=()
+  local community_enabled=()
+  local community_available=()
   local seen_names=""
 
-  # Collect workflows from custom/ first (takes priority), then community/
+  # Collect custom workflows
   for dir in "$CUSTOM_DIR"/*/; do
     [ -d "$dir" ] || continue
     name="$(basename "$dir")"
@@ -389,25 +391,25 @@ cmd_list() {
     found=true
 
     if [ -L "$ENABLED_DIR/$name" ] || [ -d "$ENABLED_DIR/$name" ]; then
-      enabled_lines+=("$(_workflow_line "$dir")")
+      custom_enabled+=("$(_workflow_line "$dir")")
     else
-      available_lines+=("$(_workflow_line "$dir")")
+      custom_available+=("$(_workflow_line "$dir")")
     fi
   done
 
+  # Collect community workflows (skip names already seen in custom/)
   for dir in "$COMMUNITY_DIR"/*/; do
     [ -d "$dir" ] || continue
     name="$(basename "$dir")"
-    # Skip if already seen in custom/
     case "$seen_names" in
       *" $name "*) continue ;;
     esac
     found=true
 
     if [ -L "$ENABLED_DIR/$name" ] || [ -d "$ENABLED_DIR/$name" ]; then
-      enabled_lines+=("$(_workflow_line "$dir")")
+      community_enabled+=("$(_workflow_line "$dir")")
     else
-      available_lines+=("$(_workflow_line "$dir")")
+      community_available+=("$(_workflow_line "$dir")")
     fi
   done
 
@@ -422,14 +424,23 @@ cmd_list() {
   fi
 
   if [ "$filter" = "all" ] || [ "$filter" = "enabled" ]; then
-    if [ ${#enabled_lines[@]} -gt 0 ]; then
+    if [ ${#custom_enabled[@]} -gt 0 ]; then
       echo ""
-      echo "  Enabled (${#enabled_lines[@]})"
-      echo "  ─────────"
-      for line in "${enabled_lines[@]}"; do
+      echo "  Your Workflows — Enabled (${#custom_enabled[@]})"
+      echo "  ──────────────────────────"
+      for line in "${custom_enabled[@]}"; do
         echo "$line"
       done
-    elif [ "$filter" = "enabled" ]; then
+    fi
+    if [ ${#community_enabled[@]} -gt 0 ]; then
+      echo ""
+      echo "  Community — Enabled (${#community_enabled[@]})"
+      echo "  ──────────────────────"
+      for line in "${community_enabled[@]}"; do
+        echo "$line"
+      done
+    fi
+    if [ "$filter" = "enabled" ] && [ ${#custom_enabled[@]} -eq 0 ] && [ ${#community_enabled[@]} -eq 0 ]; then
       echo ""
       echo "  No workflows enabled yet."
       echo "  Run 'clawflows list' to see what's available."
@@ -437,11 +448,19 @@ cmd_list() {
   fi
 
   if [ "$filter" = "all" ] || [ "$filter" = "available" ]; then
-    if [ ${#available_lines[@]} -gt 0 ]; then
+    if [ ${#custom_available[@]} -gt 0 ]; then
       echo ""
-      echo "  Available (${#available_lines[@]})"
-      echo "  ───────────"
-      for line in "${available_lines[@]}"; do
+      echo "  Your Workflows — Available (${#custom_available[@]})"
+      echo "  ────────────────────────────"
+      for line in "${custom_available[@]}"; do
+        echo "$line"
+      done
+    fi
+    if [ ${#community_available[@]} -gt 0 ]; then
+      echo ""
+      echo "  Community — Available (${#community_available[@]})"
+      echo "  ────────────────────────"
+      for line in "${community_available[@]}"; do
         echo "$line"
       done
     fi
