@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClawFlows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+  :root {
+    --bg-root: #0a0e14;
+    --bg-surface: #111820;
+    --bg-raised: #182030;
+    --bg-hover: #1a2538;
+    --border: #1e2d3d;
+    --border-subtle: #162233;
+    --text-primary: #d4dee8;
+    --text-secondary: #6b8299;
+    --text-muted: #455568;
+    --accent: #f78166;
+    --accent-glow: #f7816640;
+    --green: #3fb950;
+    --green-bg: #3fb95012;
+    --green-border: #3fb95030;
+    --red: #f85149;
+    --red-bg: #f8514912;
+    --red-border: #f8514930;
+    --purple: #bc8cff;
+    --purple-bg: #bc8cff12;
+    --yellow: #d29922;
+    --yellow-bg: #d2992212;
+    --blue: #58a6ff;
+    --blue-bg: #58a6ff14;
+    --blue-border: #58a6ff40;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg-root); color: var(--text-primary);
+    line-height: 1.6; min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 48px 24px 0;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 300px at 50% 0%, #f7816618 0%, transparent 70%),
+      radial-gradient(ellipse 400px 200px at 80% 50%, #bc8cff0a 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 680px; margin: 0 auto;
+    position: relative;
+    text-align: center;
+  }
+  .hero-logo {
+    font-size: 42px; font-weight: 700; letter-spacing: -0.04em;
+    color: #eef2f6; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hero-logo .claw { color: var(--accent); }
+  .hero-sub {
+    font-size: 15px; color: var(--text-secondary);
+    max-width: 400px; margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Tabs ── */
+  .tabs-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg-root);
+    border-bottom: 1px solid var(--border);
+    margin-top: 28px;
+  }
+  .tabs-inner {
+    max-width: 680px; margin: 0 auto;
+    display: flex; align-items: stretch;
+    padding: 0 24px; gap: 32px;
+  }
+  .tab {
+    padding: 14px 0;
+    font-size: 14px; font-weight: 500;
+    color: var(--text-muted); cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text-secondary); }
+  .tab.active { color: var(--text-primary); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab .ct {
+    display: inline-block; margin-left: 8px;
+    padding: 1px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600;
+    background: var(--bg-raised); color: var(--text-muted);
+    transition: all .15s;
+  }
+  .tab.active .ct { background: var(--accent-glow); color: var(--accent); }
+
+  /* ── Content ── */
+  .page {
+    max-width: 680px; margin: 0 auto;
+    padding: 20px 24px 80px;
+    display: none;
+  }
+  .page.active { display: block; }
+
+  /* ── Section headers (Custom / Community) ── */
+  .section-header {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 16px 16px 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-header:not(:first-child) { margin-top: 12px; border-top: 1px solid var(--border-subtle); padding-top: 20px; }
+  .section-header .create-link {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em; text-transform: none;
+    color: var(--accent); cursor: pointer; border: none; background: none;
+    font-family: var(--sans); padding: 0; transition: opacity .12s;
+  }
+  .section-header .create-link:hover { opacity: .8; }
+
+  /* ── Custom empty state ── */
+  .custom-empty {
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .custom-empty p {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 12px;
+  }
+  .create-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: var(--radius-sm);
+    border: 1px solid var(--accent); background: #f7816610;
+    color: var(--accent); font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: var(--sans); transition: all .12s;
+  }
+  .create-btn:hover { background: #f7816620; }
+
+  /* ── Loading ── */
+  .loading {
+    text-align: center; padding: 80px 20px;
+    color: var(--text-muted); font-size: 14px;
+  }
+  .loading::before {
+    content: ''; display: block;
+    width: 24px; height: 24px; margin: 0 auto 16px;
+    border: 2px solid var(--border); border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Workflow cards ── */
+  .wf {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px; border-radius: var(--radius);
+    cursor: pointer; transition: background .12s;
+    border: 1px solid transparent;
+  }
+  .wf:hover { background: var(--bg-hover); border-color: var(--border-subtle); }
+  .wf + .wf { margin-top: 2px; }
+  .wf-emoji {
+    font-size: 26px; flex-shrink: 0; line-height: 1;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-raised); border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+  }
+  .wf-body { flex: 1; min-width: 0; }
+  .wf-name { font-size: 14px; font-weight: 600; color: #dde4ec; }
+  .wf-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+  .wf-row-bottom {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 8px; flex-wrap: wrap;
+  }
+  .wf-tags { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+  .tag {
+    font-size: 10px; padding: 2px 8px; border-radius: 6px;
+    font-weight: 600; letter-spacing: 0.02em;
+  }
+  .tag-label { color: var(--text-muted); }
+  .tag-sched { background: var(--purple-bg); color: var(--purple); border: 1px solid #bc8cff18; }
+  .tag-on-demand { background: var(--bg-raised); color: var(--text-muted); border: 1px solid var(--border-subtle); }
+
+  /* ── Row action buttons ── */
+  .wf-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .wf-btn {
+    padding: 4px 12px; border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 600;
+    cursor: pointer; border: 1px solid;
+    transition: all .15s;
+  }
+  .wf-btn.details-btn {
+    border-color: var(--border); color: var(--text-muted); background: transparent;
+  }
+  .wf-btn.details-btn:hover { color: var(--text-secondary); border-color: var(--text-muted); }
+  .wf-btn.enable-btn {
+    border-color: var(--green-border); color: var(--green); background: var(--green-bg);
+  }
+  .wf-btn.enable-btn:hover { background: #3fb95020; border-color: #3fb95050; }
+  .wf-btn.disable-btn {
+    border-color: var(--border); color: var(--text-muted); background: transparent;
+  }
+  .wf-btn.disable-btn:hover { color: var(--red); border-color: var(--red-border); background: var(--red-bg); }
+  .wf-btn:disabled { opacity: .4; cursor: default; pointer-events: none; }
+
+  /* ── Empty states ── */
+  .empty { text-align: center; padding: 72px 20px; }
+  .empty-icon { font-size: 36px; margin-bottom: 14px; opacity: .7; }
+  .empty-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+  .empty-sub { font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+
+  /* ── Detail panel ── */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(4,8,14,.65);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity .2s;
+  }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .panel {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(520px, 92vw); background: var(--bg-surface);
+    border-left: 1px solid var(--border);
+    z-index: 201; transform: translateX(100%);
+    transition: transform .25s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+  }
+  .panel.open { transform: translateX(0); }
+
+  .panel-head {
+    padding: 24px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .panel-emoji {
+    font-size: 28px; line-height: 1;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-raised); border-radius: var(--radius);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .panel-info { flex: 1; min-width: 0; }
+  .panel-title { font-size: 18px; font-weight: 700; color: #eef2f6; }
+  .panel-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+  .panel-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .panel-x {
+    width: 32px; height: 32px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg-raised);
+    color: var(--text-muted); font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all .12s;
+  }
+  .panel-x:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+  .panel-cmds {
+    padding: 14px 24px; border-bottom: 1px solid var(--border);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .cmd {
+    padding: 7px 14px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg-raised);
+    color: var(--text-secondary); font-size: 12px; cursor: pointer;
+    font-family: var(--mono); font-weight: 500;
+    transition: all .12s; white-space: nowrap;
+  }
+  .cmd:hover { color: var(--text-primary); border-color: var(--text-muted); }
+  .cmd.primary { border-color: var(--blue-border); color: var(--blue); background: var(--blue-bg); }
+  .cmd.primary:hover { background: #58a6ff22; }
+  .cmd.enable-cmd { border-color: var(--green-border); color: var(--green); background: var(--green-bg); }
+  .cmd.enable-cmd:hover { background: #3fb95022; }
+  .cmd.disable-cmd { border-color: var(--red-border); color: var(--red); background: var(--red-bg); }
+  .cmd.disable-cmd:hover { background: #f8514922; }
+  .cmd:disabled { opacity: .4; cursor: default; pointer-events: none; }
+
+  .panel-body { flex: 1; overflow-y: auto; padding: 24px; }
+
+  /* ── Markdown ── */
+  .md h1 { font-size: 20px; font-weight: 700; margin: 0 0 14px; color: #eef2f6; }
+  .md h2 { font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: #dde4ec; }
+  .md h3 { font-size: 14px; font-weight: 600; margin: 18px 0 6px; color: #dde4ec; }
+  .md p { margin: 0 0 12px; color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+  .md ul, .md ol { margin: 0 0 12px; padding-left: 22px; color: var(--text-secondary); font-size: 14px; }
+  .md li { margin-bottom: 4px; line-height: 1.6; }
+  .md code { background: var(--bg-raised); padding: 2px 6px; border-radius: 4px; font-family: var(--mono); font-size: 12px; border: 1px solid var(--border-subtle); }
+  .md pre { background: var(--bg-root); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin: 0 0 12px; overflow-x: auto; }
+  .md pre code { background: none; padding: 0; border: none; font-size: 13px; }
+  .md strong { color: var(--text-primary); font-weight: 600; }
+
+  /* ── Author link ── */
+  .author-link { color: var(--text-muted); text-decoration: none; transition: color .12s; }
+  .author-link:hover { color: var(--text-secondary); text-decoration: underline; }
+
+  /* ── Share tab ── */
+  .share-page { padding: 8px 0; }
+  .share-page-title { font-size: 20px; font-weight: 700; color: #eef2f6; margin-bottom: 4px; }
+  .share-page-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+  .share-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 20px;
+  }
+  .share-card-header {
+    font-size: 12px; font-weight: 600; color: var(--text-muted);
+    letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .share-wf-list { list-style: none; padding: 0; margin: 0; }
+  .share-wf-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; font-size: 14px;
+  }
+  .share-wf-item + .share-wf-item { border-top: 1px solid var(--border-subtle); }
+  .share-wf-emoji { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+  .share-wf-name { font-weight: 600; color: var(--text-primary); }
+  .share-wf-sep { color: var(--text-muted); margin: 0 2px; }
+  .share-wf-desc { color: var(--text-secondary); }
+  .share-count {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;
+  }
+  .share-count strong { color: var(--text-primary); }
+  .share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .share-btn {
+    padding: 8px 18px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg-raised);
+    color: var(--text-secondary); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .12s;
+    font-family: var(--sans); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .share-btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+  .share-btn.x-btn { border-color: #536471; }
+  .share-btn.x-btn:hover { color: #e6edf3; background: #53647118; }
+  .share-btn.copy-btn:hover { color: var(--green); border-color: var(--green-border); }
+
+  /* ── Create modal ── */
+  .create-overlay {
+    position: fixed; inset: 0; background: rgba(4,8,14,.7);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    z-index: 400; opacity: 0; pointer-events: none; transition: opacity .2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .create-overlay.open { opacity: 1; pointer-events: auto; }
+  .create-modal {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px; width: min(480px, 90vw);
+    transform: scale(.95); transition: transform .2s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 16px 48px rgba(0,0,0,.5);
+  }
+  .create-overlay.open .create-modal { transform: scale(1); }
+  .create-title { font-size: 18px; font-weight: 700; color: #eef2f6; margin-bottom: 20px; }
+  .create-field { margin-bottom: 16px; }
+  .create-field label {
+    display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .create-field input, .create-field textarea {
+    width: 100%; padding: 8px 12px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg-root);
+    color: var(--text-primary); font-size: 14px; font-family: var(--sans);
+    outline: none; transition: border-color .12s;
+  }
+  .create-field input:focus, .create-field textarea:focus { border-color: var(--accent); }
+  .create-field textarea { resize: vertical; min-height: 80px; }
+  .create-field .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  .create-row { display: flex; gap: 12px; }
+  .create-row .create-field { flex: 1; }
+  .create-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+  .create-actions button {
+    padding: 8px 18px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: var(--sans); transition: all .12s;
+  }
+  .create-cancel {
+    border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+  }
+  .create-cancel:hover { color: var(--text-primary); border-color: var(--text-muted); }
+  .create-submit {
+    border: 1px solid var(--accent); background: var(--accent); color: #fff;
+  }
+  .create-submit:hover { filter: brightness(1.1); }
+  .create-submit:disabled { opacity: .5; cursor: default; filter: none; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--bg-raised); color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 10px 20px; border-radius: var(--radius);
+    font-size: 13px; font-weight: 500;
+    opacity: 0; transition: all .3s cubic-bezier(.4,0,.2,1);
+    z-index: 500; pointer-events: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── Entrance animation ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .wf { animation: fadeUp .3s ease both; }
+  .wf:nth-child(1) { animation-delay: 0s; }
+  .wf:nth-child(2) { animation-delay: .03s; }
+  .wf:nth-child(3) { animation-delay: .06s; }
+  .wf:nth-child(4) { animation-delay: .09s; }
+  .wf:nth-child(5) { animation-delay: .12s; }
+  .wf:nth-child(6) { animation-delay: .15s; }
+  .wf:nth-child(7) { animation-delay: .18s; }
+  .wf:nth-child(8) { animation-delay: .21s; }
+  .wf:nth-child(9) { animation-delay: .24s; }
+  .wf:nth-child(10) { animation-delay: .27s; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo"><span class="claw">Claw</span>Flows</div>
+    <div class="hero-sub">Pre-built workflows your AI agent runs on demand or on a schedule. Enable what you need, disable what you don't.</div>
+  </div>
+</div>
+
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <div class="tab active" data-tab="mine">My Workflows <span class="ct" id="ct-mine">0</span></div>
+    <div class="tab" data-tab="available">Available <span class="ct" id="ct-available">0</span></div>
+    <div class="tab" data-tab="share" style="margin-left:auto">Share My Workflows</div>
+  </div>
+</div>
+
+<div class="page active" id="page-mine">
+  <div class="loading">Loading workflows</div>
+</div>
+<div class="page" id="page-available">
+  <div class="loading">Loading workflows</div>
+</div>
+<div class="page" id="page-share"></div>
+
+<div class="overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="panel-head">
+    <div class="panel-emoji" id="pEmoji"></div>
+    <div class="panel-info">
+      <div class="panel-title" id="pName"></div>
+      <div class="panel-desc" id="pDesc"></div>
+      <div class="panel-tags" id="pTags"></div>
+    </div>
+    <button class="panel-x" id="pClose">&times;</button>
+  </div>
+  <div class="panel-cmds" id="pCmds"></div>
+  <div class="panel-body"><div class="md" id="pBody"></div></div>
+</div>
+
+<div class="create-overlay" id="createOverlay">
+  <div class="create-modal">
+    <div class="create-title">Create Workflow</div>
+    <div class="create-field">
+      <label>Name</label>
+      <input type="text" id="cName" placeholder="e.g. check-water-intake">
+      <div class="hint">Lowercase with dashes. Start with a verb (check-, send-, track-).</div>
+    </div>
+    <div class="create-row">
+      <div class="create-field">
+        <label>Emoji</label>
+        <input type="text" id="cEmoji" placeholder="e.g. 💧">
+      </div>
+      <div class="create-field">
+        <label>Schedule (optional)</label>
+        <input type="text" id="cSchedule" placeholder='e.g. 9am, 5pm'>
+        <div class="hint">Leave blank for on-demand</div>
+      </div>
+    </div>
+    <div class="create-field">
+      <label>Summary</label>
+      <input type="text" id="cSummary" placeholder="One-line description of what this does">
+    </div>
+    <div class="create-field">
+      <label>Instructions</label>
+      <textarea id="cDesc" placeholder="Step-by-step instructions for the agent..."></textarea>
+    </div>
+    <div class="create-actions">
+      <button class="create-cancel" id="createCancel">Cancel</button>
+      <button class="create-submit" id="createSubmit">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var WORKFLOWS = [];
+var openPanelName = null;
+
+function loadWorkflows() {
+  fetch('/api/workflows')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      WORKFLOWS = data;
+      render();
+    })
+    .catch(function() {
+      document.getElementById('page-mine').innerHTML =
+        '<div class="empty"><div class="empty-icon">&#x26A0;&#xFE0F;</div>' +
+        '<div class="empty-title">Failed to load workflows</div>' +
+        '<div class="empty-sub">Is the server still running?</div></div>';
+    });
+}
+
+function render() {
+  var mine = [];
+  var avail = [];
+  WORKFLOWS.forEach(function(w) {
+    if (w.enabled) mine.push(w);
+    else avail.push(w);
+  });
+
+  document.getElementById('ct-mine').textContent = mine.length;
+  document.getElementById('ct-available').textContent = avail.length;
+
+  renderSectionedList(mine, 'page-mine', {
+    icon: '\u26A1\uFE0F', title: 'No workflows enabled yet',
+    sub: 'Check the Available tab to turn some on'
+  }, true);
+  renderSectionedList(avail, 'page-available', {
+    icon: '\u2705', title: 'Everything is enabled!',
+    sub: 'You\'ve turned on every available workflow'
+  }, false);
+
+  renderShareTab();
+
+  if (openPanelName) openPanel(openPanelName);
+}
+
+function renderSectionedList(items, containerId, emptyMsg, isEnabled) {
+  var el = document.getElementById(containerId);
+  if (items.length === 0 && !isEnabled) {
+    // Available tab with nothing — still show custom section with create
+    el.innerHTML =
+      '<div class="section-header">Your Workflows <button class="create-link" onclick="openCreate()">+ Create</button></div>' +
+      '<div class="custom-empty"><p>You haven\'t created any custom workflows yet.</p>' +
+      '<button class="create-btn" onclick="openCreate()">+ Create Workflow</button></div>' +
+      '<div class="empty"><div class="empty-icon">' + emptyMsg.icon +
+      '</div><div class="empty-title">' + emptyMsg.title +
+      '</div><div class="empty-sub">' + emptyMsg.sub + '</div></div>';
+    return;
+  }
+  if (items.length === 0) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">' + emptyMsg.icon +
+      '</div><div class="empty-title">' + emptyMsg.title +
+      '</div><div class="empty-sub">' + emptyMsg.sub + '</div></div>';
+    return;
+  }
+
+  var custom = [];
+  var community = [];
+  items.forEach(function(w) {
+    if (w.source === 'custom') custom.push(w);
+    else community.push(w);
+  });
+
+  var html = '';
+
+  // Always show custom section in Available tab
+  if (!isEnabled) {
+    html += '<div class="section-header">Your Workflows <button class="create-link" onclick="openCreate()">+ Create</button></div>';
+    if (custom.length > 0) {
+      html += renderCards(custom, isEnabled);
+    } else {
+      html += '<div class="custom-empty"><p>You haven\'t created any custom workflows yet.</p>' +
+        '<button class="create-btn" onclick="openCreate()">+ Create Workflow</button></div>';
+    }
+  } else {
+    if (custom.length > 0) {
+      html += '<div class="section-header">Your Workflows</div>';
+      html += renderCards(custom, isEnabled);
+    }
+  }
+
+  if (community.length > 0) {
+    html += '<div class="section-header">Community</div>';
+    html += renderCards(community, isEnabled);
+  }
+  el.innerHTML = html;
+}
+
+function renderCards(items, isEnabled) {
+  var html = '';
+  items.forEach(function(w) {
+    var tags = '';
+    if (w.schedule) tags += '<span class="tag tag-sched"><span class="tag-label">Runs: </span>' + esc(w.schedule) + '</span>';
+    else tags += '<span class="tag tag-on-demand"><span class="tag-label">Runs: </span>On Demand</span>';
+
+    var toggleBtn = '';
+    if (isEnabled) {
+      toggleBtn = '<button class="wf-btn disable-btn" data-action="disable" data-wf="' + esc(w.name) + '">disable</button>';
+    } else {
+      toggleBtn = '<button class="wf-btn enable-btn" data-action="enable" data-wf="' + esc(w.name) + '">enable</button>';
+    }
+
+    html += '<div class="wf" data-name="' + esc(w.name) + '">' +
+      '<div class="wf-emoji">' + (w.emoji || '\uD83D\uDCC4') + '</div>' +
+      '<div class="wf-body">' +
+        '<div class="wf-name">' + esc(w.name) + '</div>' +
+        '<div class="wf-desc">' + esc(w.description) + '</div>' +
+        '<div class="wf-row-bottom">' +
+          '<div class="wf-tags">' + tags + '</div>' +
+          '<div class="wf-actions">' +
+            '<button class="wf-btn details-btn" data-details="' + esc(w.name) + '">details</button>' +
+            toggleBtn +
+          '</div>' +
+        '</div>' +
+      '</div></div>';
+  });
+  return html;
+}
+
+function authorUrl(handle) {
+  if (!handle) return '';
+  var clean = handle.replace(/^@/, '');
+  return 'https://github.com/' + encodeURIComponent(clean);
+}
+
+function authorHtml(handle) {
+  if (!handle) return '';
+  return '<a class="author-link" href="' + authorUrl(handle) + '" target="_blank" rel="noopener">' + esc(handle) + '</a>';
+}
+
+function esc(s) {
+  if (!s) return '';
+  var d = document.createElement('div');
+  d.appendChild(document.createTextNode(s));
+  return d.innerHTML;
+}
+
+// ── Share tab ──
+function renderShareTab() {
+  var enabled = [];
+  WORKFLOWS.forEach(function(w) { if (w.enabled) enabled.push(w); });
+
+  var el = document.getElementById('page-share');
+  if (enabled.length === 0) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">&#x1F4E2;</div>' +
+      '<div class="empty-title">Nothing to share yet</div>' +
+      '<div class="empty-sub">Enable some workflows first, then come back here to share your setup</div></div>';
+    return;
+  }
+
+  var lines = enabled.map(function(w) {
+    return (w.emoji || '') + ' ' + w.name + ' \u2014 ' + w.description;
+  });
+  var shareText = 'My ClawFlows setup \uD83D\uDC7E\n\n' + lines.join('\n') + '\n\nhttps://github.com/davehappyminion/clawflows';
+  var tweetText = encodeURIComponent('My ClawFlows setup \uD83D\uDC7E\n\n' + lines.slice(0, 5).join('\n') + (enabled.length > 5 ? '\n+' + (enabled.length - 5) + ' more' : '') + '\n\nhttps://github.com/davehappyminion/clawflows');
+
+  var wfListHtml = '';
+  enabled.forEach(function(w) {
+    wfListHtml += '<div class="share-wf-item">' +
+      '<span class="share-wf-emoji">' + (w.emoji || '\uD83D\uDCC4') + '</span>' +
+      '<span><span class="share-wf-name">' + esc(w.name) + '</span>' +
+      '<span class="share-wf-sep"> \u2014 </span>' +
+      '<span class="share-wf-desc">' + esc(w.description) + '</span></span>' +
+      '</div>';
+  });
+
+  el.innerHTML =
+    '<div class="share-page">' +
+      '<div class="share-page-title">Share My Workflows</div>' +
+      '<div class="share-page-sub">Show off your ClawFlows setup to the world.</div>' +
+      '<div class="share-card">' +
+        '<div class="share-card-header">' + enabled.length + ' workflow' + (enabled.length === 1 ? '' : 's') + ' enabled</div>' +
+        '<div class="share-wf-list">' + wfListHtml + '</div>' +
+      '</div>' +
+      '<div class="share-btns">' +
+        '<a class="share-btn x-btn" href="https://x.com/intent/tweet?text=' + tweetText + '" target="_blank" rel="noopener">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>' +
+          'Post on X</a>' +
+        '<button class="share-btn copy-btn" id="share-copy-btn">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>' +
+          'Copy to Clipboard</button>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById('share-copy-btn').addEventListener('click', function() {
+    copyCmd(shareText);
+  });
+}
+
+// ── Create workflow ──
+function openCreate() {
+  document.getElementById('cName').value = '';
+  document.getElementById('cEmoji').value = '';
+  document.getElementById('cSchedule').value = '';
+  document.getElementById('cSummary').value = '';
+  document.getElementById('cDesc').value = '';
+  document.getElementById('createOverlay').classList.add('open');
+  document.getElementById('cName').focus();
+}
+
+function closeCreate() {
+  document.getElementById('createOverlay').classList.remove('open');
+}
+
+document.getElementById('createCancel').addEventListener('click', closeCreate);
+document.getElementById('createOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeCreate();
+});
+
+document.getElementById('createSubmit').addEventListener('click', function() {
+  var name = document.getElementById('cName').value.trim().toLowerCase().replace(/\s+/g, '-');
+  var emoji = document.getElementById('cEmoji').value.trim();
+  var schedule = document.getElementById('cSchedule').value.trim();
+  var summary = document.getElementById('cSummary').value.trim();
+  var description = document.getElementById('cDesc').value.trim();
+
+  if (!name) { toast('Name is required'); return; }
+  if (!summary) { toast('Summary is required'); return; }
+  if (!description) { toast('Instructions are required'); return; }
+
+  var json = { name: name, summary: summary, description: description };
+  if (emoji) json.emoji = emoji;
+  if (schedule) json.schedule = schedule;
+
+  var btn = document.getElementById('createSubmit');
+  btn.disabled = true;
+
+  fetch('/api/create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(json)
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      btn.disabled = false;
+      if (data.ok) {
+        toast('Created ' + name);
+        closeCreate();
+        // Optimistic: add to local data and render immediately
+        WORKFLOWS.push({
+          name: name, emoji: emoji || '', description: summary,
+          schedule: schedule || '', author: '', source: 'custom',
+          enabled: true, content: description
+        });
+        render();
+        // Background sync to pick up any server-side changes
+        loadWorkflows();
+      } else {
+        toast('Error: ' + (data.message || 'unknown'));
+      }
+    })
+    .catch(function() {
+      btn.disabled = false;
+      toast('Network error');
+    });
+});
+
+function toggleWorkflow(action, name) {
+  var btns = document.querySelectorAll('.wf-btn.enable-btn, .wf-btn.disable-btn, .cmd.enable-cmd, .cmd.disable-cmd');
+  btns.forEach(function(b) { b.disabled = true; });
+
+  // Optimistic: update local state and render immediately
+  var newEnabled = (action === 'enable');
+  for (var i = 0; i < WORKFLOWS.length; i++) {
+    if (WORKFLOWS[i].name === name) { WORKFLOWS[i].enabled = newEnabled; break; }
+  }
+  render();
+  toast((action === 'enable' ? 'Enabled ' : 'Disabled ') + name);
+
+  fetch('/api/' + action + '/' + encodeURIComponent(name), { method: 'POST' })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        // Background sync to pick up any server-side changes
+        loadWorkflows();
+      } else {
+        // Revert on failure
+        for (var i = 0; i < WORKFLOWS.length; i++) {
+          if (WORKFLOWS[i].name === name) { WORKFLOWS[i].enabled = !newEnabled; break; }
+        }
+        render();
+        toast('Error: ' + (data.message || 'unknown'));
+      }
+    })
+    .catch(function() {
+      // Revert on network error
+      for (var i = 0; i < WORKFLOWS.length; i++) {
+        if (WORKFLOWS[i].name === name) { WORKFLOWS[i].enabled = !newEnabled; break; }
+      }
+      render();
+      toast('Network error');
+    });
+}
+
+document.addEventListener('click', function(e) {
+  var detailsBtn = e.target.closest('.wf-btn.details-btn');
+  if (detailsBtn) {
+    e.stopPropagation();
+    openPanel(detailsBtn.dataset.details);
+    return;
+  }
+  var toggleBtn = e.target.closest('.wf-btn.enable-btn, .wf-btn.disable-btn');
+  if (toggleBtn) {
+    e.stopPropagation();
+    toggleWorkflow(toggleBtn.dataset.action, toggleBtn.dataset.wf);
+    return;
+  }
+});
+
+document.addEventListener('click', function(e) {
+  var cmdBtn = e.target.closest('.cmd.enable-cmd, .cmd.disable-cmd');
+  if (cmdBtn) {
+    toggleWorkflow(cmdBtn.dataset.action, cmdBtn.dataset.wf);
+    return;
+  }
+});
+
+document.querySelector('.tabs-inner').addEventListener('click', function(e) {
+  var tab = e.target.closest('.tab');
+  if (!tab) return;
+  var key = tab.dataset.tab;
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  tab.classList.add('active');
+  document.getElementById('page-' + key).classList.add('active');
+});
+
+document.addEventListener('click', function(e) {
+  // Don't open panel if clicking a button inside the card
+  if (e.target.closest('.wf-btn') || e.target.closest('.create-link') || e.target.closest('.create-btn')) return;
+  var wf = e.target.closest('.wf');
+  if (!wf) return;
+  openPanel(wf.dataset.name);
+});
+
+function openPanel(name) {
+  var w = null;
+  for (var i = 0; i < WORKFLOWS.length; i++) {
+    if (WORKFLOWS[i].name === name) { w = WORKFLOWS[i]; break; }
+  }
+  if (!w) { closePanel(); return; }
+
+  openPanelName = name;
+
+  document.getElementById('pEmoji').textContent = w.emoji || '\uD83D\uDCC4';
+  document.getElementById('pName').textContent = w.name;
+  document.getElementById('pDesc').textContent = w.description;
+
+  var tags = '';
+  if (w.schedule) tags += '<span class="tag tag-sched"><span class="tag-label">Runs: </span>' + esc(w.schedule) + '</span>';
+  else tags += '<span class="tag tag-on-demand"><span class="tag-label">Runs: </span>On Demand</span>';
+  if (w.author) tags += '<span class="tag" style="background:var(--bg-raised);color:var(--text-muted);border:1px solid var(--border-subtle)">' + authorHtml(w.author) + '</span>';
+  document.getElementById('pTags').innerHTML = tags;
+
+  var cmds = '';
+  if (w.enabled) {
+    cmds += '<button class="cmd primary" onclick="copyCmd(\'clawflows run ' + esc(w.name) + '\')">run</button>';
+    cmds += '<button class="cmd disable-cmd" data-action="disable" data-wf="' + esc(w.name) + '">disable</button>';
+  } else {
+    cmds += '<button class="cmd enable-cmd" data-action="enable" data-wf="' + esc(w.name) + '">enable</button>';
+  }
+  cmds += '<button class="cmd" onclick="copyCmd(\'clawflows edit ' + esc(w.name) + '\')">edit</button>';
+  document.getElementById('pCmds').innerHTML = cmds;
+  document.getElementById('pBody').innerHTML = renderMd(w.content || '');
+
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('panel').classList.add('open');
+}
+
+function closePanel() {
+  openPanelName = null;
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('panel').classList.remove('open');
+}
+document.getElementById('overlay').addEventListener('click', closePanel);
+document.getElementById('pClose').addEventListener('click', closePanel);
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('createOverlay').classList.contains('open')) closeCreate();
+    else closePanel();
+  }
+});
+
+function copyCmd(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() { toast('Copied!'); });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    toast('Copied!');
+  }
+}
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(function() { el.classList.remove('show'); }, 2000);
+}
+
+function renderMd(text) {
+  if (!text) return '';
+  var lines = text.split('\n'), html = '', inCode = false, inList = false, lt = '';
+  for (var i = 0; i < lines.length; i++) {
+    var L = lines[i];
+    if (L.match(/^```/)) { if (inCode) { html += '</code></pre>'; inCode = false; } else { html += '<pre><code>'; inCode = true; } continue; }
+    if (inCode) { html += esc(L) + '\n'; continue; }
+    if (inList && !L.match(/^\s*[-*]\s/) && !L.match(/^\s*\d+\.\s/) && L.trim() !== '') { html += '</' + lt + '>'; inList = false; }
+    if (L.match(/^### /)) { html += '<h3>' + inl(L.slice(4)) + '</h3>'; continue; }
+    if (L.match(/^## /)) { html += '<h2>' + inl(L.slice(3)) + '</h2>'; continue; }
+    if (L.match(/^# /)) { html += '<h1>' + inl(L.slice(2)) + '</h1>'; continue; }
+    if (L.match(/^\s*[-*]\s/)) {
+      if (!inList || lt !== 'ul') { if (inList) html += '</' + lt + '>'; html += '<ul>'; inList = true; lt = 'ul'; }
+      html += '<li>' + inl(L.replace(/^\s*[-*]\s/, '')) + '</li>'; continue;
+    }
+    if (L.match(/^\s*\d+\.\s/)) {
+      if (!inList || lt !== 'ol') { if (inList) html += '</' + lt + '>'; html += '<ol>'; inList = true; lt = 'ol'; }
+      html += '<li>' + inl(L.replace(/^\s*\d+\.\s/, '')) + '</li>'; continue;
+    }
+    if (L.trim() === '') { if (inList) { html += '</' + lt + '>'; inList = false; } continue; }
+    html += '<p>' + inl(L) + '</p>';
+  }
+  if (inCode) html += '</code></pre>';
+  if (inList) html += '</' + lt + '>';
+  return html;
+}
+function inl(t) {
+  t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+  return t;
+}
+
+loadWorkflows();
+</script>
+</body>
+</html>

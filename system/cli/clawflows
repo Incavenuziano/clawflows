@@ -59,6 +59,7 @@ cmd_help() {
     list                 Show all workflows (enabled + available)
     list enabled         Show only enabled workflows
     list available       Show only available workflows
+    dashboard            Open workflows in your browser
 
   ✨ Creating
     create               Create a new custom workflow (interactive)
@@ -691,6 +692,7 @@ _build_block() {
   lines+=("3. If the workflow isn't enabled yet, run \`clawflows enable <name>\` first")
   lines+=("")
   lines+=("### CLI Commands")
+  lines+=("- \`clawflows dashboard\` — open a visual workflow browser in the user's web browser")
   lines+=("- \`clawflows list\` — see all workflows")
   lines+=("- \`clawflows enable <name>\` — turn on a workflow")
   lines+=("- \`clawflows disable <name>\` — turn off a workflow")
@@ -1131,6 +1133,167 @@ cmd_run() {
   fi
 }
 
+# ── Dashboard ────────────────────────────────────────────────────────────────
+
+# Build JSON array of all workflows (single awk pass for speed)
+_build_dashboard_json() {
+  # Collect all workflow files with metadata: source|enabled|filepath
+  local manifest=""
+  local seen_names=""
+
+  # Custom workflows first
+  for dir in "$CUSTOM_DIR"/*/; do
+    [ -d "$dir" ] || continue
+    local name
+    name="$(basename "$dir")"
+    [ "$name" = ".gitkeep" ] && continue
+    [ -f "$dir/WORKFLOW.md" ] || continue
+    seen_names="$seen_names $name "
+
+    local enabled="false"
+    if [ -L "$ENABLED_DIR/$name" ] || [ -d "$ENABLED_DIR/$name" ]; then
+      enabled="true"
+    fi
+    manifest="$manifest
+custom|$enabled|${dir%/}/WORKFLOW.md"
+  done
+
+  # Community workflows (skip overridden by custom)
+  for dir in "$COMMUNITY_DIR"/*/; do
+    [ -d "$dir" ] || continue
+    local name
+    name="$(basename "$dir")"
+    [ -f "$dir/WORKFLOW.md" ] || continue
+    case "$seen_names" in
+      *" $name "*) continue ;;
+    esac
+
+    local enabled="false"
+    if [ -L "$ENABLED_DIR/$name" ] || [ -d "$ENABLED_DIR/$name" ]; then
+      enabled="true"
+    fi
+    manifest="$manifest
+community|$enabled|${dir%/}/WORKFLOW.md"
+  done
+
+  # No workflows? Fast path
+  if [ -z "$manifest" ]; then
+    printf '[]'
+    return
+  fi
+
+  # Single awk reads all files and outputs the full JSON array
+  printf '%s\n' "$manifest" | awk '
+    function json_esc(s,   i, c, out) {
+      out = ""
+      for (i = 1; i <= length(s); i++) {
+        c = substr(s, i, 1)
+        if (c == "\\") out = out "\\\\"
+        else if (c == "\"") out = out "\\\""
+        else if (c == "\t") out = out "\\t"
+        else out = out c
+      }
+      return out
+    }
+
+    BEGIN { first = 1; printf "[" }
+
+    /^$/ { next }
+
+    {
+      # Parse manifest line: source|enabled|filepath
+      n = split($0, parts, "|")
+      src = parts[1]; ena = parts[2]; fp = parts[3]
+
+      # Derive name from path: .../name/WORKFLOW.md
+      gsub(/\/WORKFLOW\.md$/, "", fp)
+      name = fp; sub(/.*\//, "", name)
+      fp = fp "/WORKFLOW.md"
+
+      emoji = ""; desc = ""; sched = ""; author = ""; content = ""
+      in_fm = 0; past_fm = 0
+      while ((getline line < fp) > 0) {
+        if (line == "---") { in_fm++; if (in_fm >= 2) past_fm = 1; continue }
+        if (in_fm == 1 && !past_fm) {
+          if (line ~ /^emoji:/) { val = line; sub(/^emoji:[ ]*/, "", val); gsub(/^["'"'"']|["'"'"']$/, "", val); emoji = val }
+          else if (line ~ /^description:/) { val = line; sub(/^description:[ ]*/, "", val); gsub(/^["'"'"']|["'"'"']$/, "", val); desc = val }
+          else if (line ~ /^schedule:/) { val = line; sub(/^schedule:[ ]*/, "", val); gsub(/^["'"'"']|["'"'"']$/, "", val); sched = val }
+          else if (line ~ /^author:/) { val = line; sub(/^author:[ ]*/, "", val); gsub(/^["'"'"']|["'"'"']$/, "", val); author = val }
+        }
+        if (past_fm) {
+          if (content != "") content = content "\\n" json_esc(line)
+          else content = json_esc(line)
+        }
+      }
+      close(fp)
+
+      if (!first) printf ","
+      printf "{\"name\":\"%s\",\"emoji\":\"%s\",\"description\":\"%s\",\"schedule\":\"%s\",\"author\":\"%s\",\"source\":\"%s\",\"enabled\":%s,\"content\":\"%s\"}", \
+        json_esc(name), emoji, json_esc(desc), json_esc(sched), json_esc(author), src, ena, content
+      first = 0
+    }
+
+    END { printf "]" }
+  '
+}
+
+cmd_dashboard() {
+  local flag="${1:-}"
+
+  # --json flag: output workflow JSON to stdout (used by server.js)
+  if [ "$flag" = "--json" ]; then
+    _build_dashboard_json
+    return
+  fi
+
+  local template_dir="$CLAWFLOWS_DIR/system/dashboard"
+  local template="$template_dir/template.html"
+  local server="$template_dir/server.js"
+
+  [ -f "$template" ] || die "dashboard template not found at $template"
+  [ -f "$server" ] || die "dashboard server not found at $server"
+  command -v node >/dev/null 2>&1 || die "node is required for the dashboard (install Node.js)"
+
+  local port="${DASHBOARD_PORT:-0}"
+  local cli_path
+  cli_path="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+  # If this script is a symlink, resolve to the real path
+  if [ -L "$0" ]; then
+    cli_path="$(readlink "$0")"
+  fi
+
+  # Use a FIFO to read the server's URL from its first stdout line
+  local fifo
+  fifo="$(mktemp -d)/dashboard-fifo"
+  mkfifo "$fifo"
+
+  # Start Node server in background, forwarding env vars
+  node "$server" "$port" "$cli_path" "$template" > "$fifo" 2>&1 &
+  local server_pid=$!
+
+  # Clean up on exit
+  trap 'kill $server_pid 2>/dev/null; rm -f "$fifo"; rm -rf "$(dirname "$fifo")"' EXIT
+
+  # Read the URL from the first line
+  local url
+  read -r url < "$fifo"
+
+  # Keep draining the FIFO in background so the server doesn't block
+  cat "$fifo" >/dev/null &
+
+  echo "Dashboard running at $url"
+  echo "Press Ctrl+C to stop"
+  echo ""
+
+  # Open in browser (skip if DASHBOARD_NO_OPEN is set, e.g. in tests)
+  if [ -z "${DASHBOARD_NO_OPEN:-}" ]; then
+    open "$url" 2>/dev/null || true
+  fi
+
+  # Wait for Ctrl+C
+  wait "$server_pid" 2>/dev/null || true
+}
+
 # ── Main ────────────────────────────────────────────────────────────────────
 
 [ $# -ge 1 ] || { cmd_help; exit 0; }
@@ -1148,6 +1311,7 @@ case "$1" in
   backup)    cmd_backup "${2:-}" ;;
   restore)   cmd_restore "${2:-}" ;;
   update)    cmd_update ;;
+  dashboard) cmd_dashboard "${2:-}" ;;
   uninstall) cmd_uninstall ;;
   sync-agent) cmd_sync ;;
   help|--help|-h) cmd_help ;;

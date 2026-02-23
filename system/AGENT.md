@@ -199,6 +199,9 @@ Everything below is for ongoing use after installation. Refer to this whenever y
 ## CLI Commands
 
 ```bash
+# Open a visual workflow browser in the user's web browser
+clawflows dashboard
+
 # See all workflows (enabled + available)
 clawflows list
 

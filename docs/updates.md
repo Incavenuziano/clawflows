@@ -2,6 +2,9 @@
 
 ## Sun, Feb 22
 
+- 🌐 **Live dashboard** — `clawflows dashboard` now starts a local server so you can enable and disable workflows right from your browser — no more copying CLI commands! Click the toggle, watch it flip, done. It's like having a banana-powered control panel 🍌
+- ⚡ **9x faster dashboard** — Dashboard JSON generation went from 5.2s to 0.6s by replacing ~550 subprocess spawns with a single awk pass. Your banana-powered control panel now loads before you can peel one 🍌
+- 🚀 **Instant enable/disable** — Toggling workflows and creating new ones now update the UI instantly with optimistic rendering. The server syncs in the background while you admire your freshly toggled banana.
 - 🍌 **Custom vs Community in list** — `clawflows list` now separates your custom workflows from community ones! Your bananas go in one basket, the community's in another. No more guessing which workflows are yours.
 - 🔗 **Fixed rogue workflow creation** — The creating-workflows guide was telling agents to drop workflows straight into `workflows/enabled/` like a banana without a peel. Now it correctly says to use `clawflows create`, which puts them in `custom/` and symlinks them like a civilized minion.
 
