@@ -1,6 +1,6 @@
 # Updates
 
-## Tue, Mar 4
+## Fri, Mar 7
 
 - 📤 **Share a single workflow** — `clawflows share <name>` generates shareable text with the workflow's emoji, name, description, and a one-liner install+enable command. Add `--copy` to yeet it straight to your clipboard. The dashboard detail panel also has a shiny Share button that renders a shareable image card, lets you download it, copy the text, or post on X. One banana at a time, shared with the world! 🍌
 
