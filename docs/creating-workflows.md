@@ -111,11 +111,6 @@ emoji: ☀️
 description: Daily morning briefing — gathers weather, calendar, priorities, and news into one summary.
 author: nikilster @nikil
 schedule: "7am"
-requires:
-  - name: calendar
-    description: Google Calendar or similar
-  - name: weather
-    description: Weather service
 ---
 
 # Morning Briefing
@@ -139,7 +134,6 @@ Send the briefing to the user's preferred channel.
 | `description` | Yes | What it does — a plain description the agent can match on. |
 | `author` | No | Who made it. GitHub username and/or X handle, space-separated. |
 | `schedule` | No | When to run automatically. Omit for on-demand only. |
-| `requires` | No | Skills and tools needed. Each has a `name` and `description`. |
 
 ### The `author` Field
 
@@ -176,18 +170,6 @@ schedule: "8am, 6pm"               # Twice daily
 Times are in 12-hour format with am/pm. No days — scheduled workflows run daily at the specified times.
 
 Omit the `schedule` field for on-demand workflows that only run when triggered manually.
-
-### The `requires` Field
-
-List the tools and services the workflow needs. The `name` matches the skill name (from that skill's `SKILL.md` frontmatter). The `description` explains what it is in plain English.
-
-```yaml
-requires:
-  - name: openhue
-    description: Philips Hue smart bulbs
-  - name: lutron
-    description: Lutron Caseta light switches and dimmers
-```
 
 ## Naming Convention
 

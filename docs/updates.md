@@ -1,5 +1,9 @@
 # Updates
 
+## Wed, Mar 19
+
+- 🧹 **Removed `requires` field** — The `requires` frontmatter field never got used by a single workflow or the CLI, so we yeeted it. Workflows just describe what they need in plain text and the agent figures it out — no need for a formal dependency spec. One less thing to think about when creating a workflow, one more banana for simplicity! 🍌
+
 ## Sun, Mar 8
 
 - 📜 **Run logs** — `clawflows run` now captures agent output automatically, so you can see exactly what happened! `clawflows logs` shows your recent runs with their output, filter by workflow name or date. The dashboard shows log previews in Run History and expandable logs in the detail panel. No more "did it run?" guessing — every banana leaves a trail now 🍌
