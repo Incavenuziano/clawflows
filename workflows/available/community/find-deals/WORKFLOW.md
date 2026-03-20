@@ -8,97 +8,51 @@ schedule: "10am"
 
 # Find Deals
 
-Watch for price drops on things you actually want. No noise, no junk — just actionable alerts when a wishlist item hits your target price or a genuinely good deal appears.
+Watch for price drops on things you actually want. No noise — just actionable alerts.
 
 ## 1. Load the Wishlist
 
-Check the user's wishlist for tracked items. Each item should have:
-- Product name and/or URL
-- Target price (the price at which the user wants to be notified)
-- Current known price (from the last check)
-- Retailer(s) to monitor
-- Priority (nice-to-have vs. waiting-to-buy)
+Check the user's wishlist for tracked items. Each item should have a product name/URL, target price, and retailer(s). If no wishlist exists, skip to Step 2.
 
-If no wishlist exists yet, note that and skip to Step 3 (email scanning).
-
-## 2. Check Current Prices
-
-For each wishlist item, look up the current price at tracked retailers:
-- Compare against the user's target price
-- Compare against the last known price (detect drops and increases)
-- Check if any coupon codes or promotions apply
-- Note if the item is out of stock, discontinued, or has limited availability
-
-Record the price history data point for trend tracking.
-
-## 3. Scan Email for Retailer Promotions
+## 2. Scan Email for Deals
 
 Search the user's email from the last 48 hours for:
-- "sale" OR "price drop" OR "deal" OR "coupon" OR "promo code"
-- "back in stock" OR "price alert" OR "limited time"
-- Known retailer promotional emails (Amazon, Best Buy, Target, Walmart, B&H, Costco, etc.)
-- Price alert services (CamelCamelCamel, Honey, Slickdeals notifications)
+- Sale notifications, price drops, promo codes
+- "Back in stock" or "limited time" alerts
+- Emails from known retailers (Amazon, Best Buy, Target, Walmart, etc.)
+- Price alert service notifications (CamelCamelCamel, Honey, Slickdeals)
 
-Extract:
-- Product or category on sale
-- Discount amount or percentage
-- Promo code if included
-- Expiration date of the deal
-- Whether it matches any wishlist item
+Extract: product/category on sale, discount amount, promo code if included, and expiration date.
 
-## 4. Cross-Reference and Score
+## 3. Cross-Reference with Wishlist
 
-For each potential deal found:
-- **Direct wishlist match** — item is on the wishlist and at or below target price. Top priority.
-- **Wishlist adjacent** — item is related to something on the wishlist (same category, newer model, accessory). Worth mentioning.
-- **Notable deal** — significant discount (40%+ off) on a product category the user has shown interest in.
-- **Skip** — doesn't match user interests, isn't a meaningful discount, or is from a sketchy source.
+Match deals against the wishlist:
+- **Direct hit** — Wishlist item at or below target price. Top priority.
+- **Related** — Same category or newer model of a wishlist item. Worth mentioning.
+- Only surface unrelated deals if they are significant (40%+ off) and match the user's interests.
 
-Only surface Direct matches and Wishlist adjacent items by default. Include Notable deals only if there are fewer than 3 other items to report.
+## 4. Present the Report
 
-## 5. Present the Report
+Summarize:
+- Target price hits (with links and current price)
+- Price drops not yet at target
+- Notable deals worth a look (with expiration dates and promo codes)
+- Items checked with no changes
 
-```
-DEAL WATCH — [Date]
-====================================
+If a deal expires within 24 hours, note the urgency.
 
-TARGET PRICE HIT:
-  [Product Name]
-  Now: $XX.XX (target was $XX.XX) — [Retailer]
-  Was: $XX.XX last check | All-time low: $XX.XX
-  Link: [url]
+## 5. Deliver Alerts
 
-PRICE DROPS (not yet at target):
-  [Product Name]
-  Now: $XX.XX ↓ from $XX.XX (-XX%) — [Retailer]
-  Your target: $XX.XX (still $X.XX away)
-  Link: [url]
+- Target price hits are high priority and time-sensitive.
+- If nothing changed, send a brief "No deals today" one-liner.
 
-DEALS WORTH A LOOK:
-  [Product/Category] — XX% off at [Retailer]
-  [Brief description] | Expires [date]
-  Code: [PROMO_CODE] (if applicable)
-  Link: [url]
+## Safety Rules
 
-PRICE INCREASES (heads up):
-  [Product Name] — went UP from $XX.XX to $XX.XX at [Retailer]
-
-NO CHANGE:
-  [X] wishlist items checked, no movement.
-```
-
-## 6. Deliver Alerts
-
-- **Target price hit:** Send immediately as a high-priority message, even outside the normal schedule. These are time-sensitive.
-- **Daily run (10am):** Send the full report if there's anything to report. If nothing changed, send a brief "No deals today — [X] items watched" one-liner.
-- If a deal has an expiration within 24 hours, note the urgency clearly.
+- **NEVER purchase anything automatically.** Report deals only — the user decides.
+- **NEVER click affiliate links or sign up for services on the user's behalf.**
+- Avoid deals that require a new credit card, subscription, or membership.
 
 ## Notes
 
-- **NEVER purchase anything automatically.** This workflow finds and reports deals. The user decides whether to buy.
-- **NEVER click affiliate links or sign up for deal services on the user's behalf.**
-- Price data can be noisy — third-party sellers on Amazon, marketplace fluctuations, "was/now" pricing games. Focus on the actual lowest available price from reputable sellers.
-- If a product has been on the wishlist for 90+ days without hitting the target price, suggest whether the target is realistic based on price history.
-- When a wishlist item is frequently going in and out of stock, mention the stock pattern so the user can act faster next time.
-- Avoid surfacing "deals" that require signing up for a new credit card, subscription, or membership the user doesn't already have.
-- If the user hasn't set up a wishlist, prompt them to add items after the first run. The workflow is most useful with a populated wishlist.
+- If a wishlist item hasn't hit its target in 90+ days, suggest whether the target is realistic.
+- If the user hasn't set up a wishlist, prompt them to add items after the first run.

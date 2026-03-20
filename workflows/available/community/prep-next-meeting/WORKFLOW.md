@@ -1,83 +1,73 @@
 ---
 name: prep-next-meeting
 emoji: 🔍
-description: Quick meeting prep — checks who you're meeting in the next hour and researches external attendees.
-author: @davehappyminion
+description: Meeting prep — researches attendees, pulls context from past meetings and emails, and generates talking points before your next meeting.
+author: @openclaw
 schedule: "every 30 minutes"
 ---
 
 # Prep Next Meeting
 
-Automatic heads-up before meetings with external people. Runs every 30 minutes.
+Never walk into a meeting cold. Runs every 30 minutes and preps you for whatever's next.
 
 ## 1. Check Calendar
 
 Using your **calendar skill**, look at meetings starting in the next 60 minutes.
 
-If no meetings in the next hour, stop here — nothing to report.
+If no meetings in the next hour, stop here.
 
-## 2. Identify External Attendees
+## 2. Identify Attendees
 
 For each upcoming meeting, check the attendee list:
 
-**Internal** (skip these):
-- Same email domain as user
-- Known colleagues
+**Internal** (same email domain or known colleagues):
+- Note role/team if relevant; skip routine syncs with your own team
 
-**External** (research these):
-- Different email domain
-- First time meeting
-- Client, prospect, investor, candidate, etc.
+**External** (different domain — clients, candidates, investors, partners):
+- Full research treatment; flag first-time meetings for extra context
 
-If no external attendees, stop here.
+If it's a routine internal sync with no external attendees, skip to step 4.
 
-## 3. Research External People
+## 3. Research Attendees
 
-For each external attendee, gather:
+For **external attendees**, using **web search** and **email skill**:
+- Full name, company, and role
+- What their company does and recent news
+- Previous email threads with the user
 
-### Basic Info
-- Full name
-- Company and role
-- LinkedIn profile (if findable)
+For **important internal meetings** (skip-levels, cross-team):
+- Recent interactions and pending items between you
 
-### Background
-- What does their company do?
-- How big is the company?
-- Recent news about them or their company
+## 4. Build Talking Points
 
-### Connection
-- Have you emailed them before? What about?
-- Any mutual connections?
-- How did this meeting get scheduled?
+Based on the meeting context:
+- **Agenda suggestions** if no agenda exists
+- **Follow-ups** from past meetings with the same attendees
+- **Questions to ask** (2-3 based on meeting type)
+- **Key points to raise** from recent work or email threads
 
-Use **web search** and **email skill** to gather this.
-
-## 4. Deliver the Brief
-
-Send a quick summary:
+## 5. Deliver the Brief
 
 ```
-🔍 Meeting in {X} minutes: {Meeting Title}
+Meeting in {X} minutes: {Meeting Title}
 
-External attendee: {Name}
-- {Role} at {Company}
-- {One-liner about the company}
+Attendees: {Names and roles}
 
-Background:
-- {Key fact 1}
-- {Key fact 2}
-- {Recent news if relevant}
+Context:
+- {Key background point}
+- {Previous meeting summary or "First meeting"}
 
-Previous contact:
-- {Email thread summary or "First meeting"}
+Talking Points:
+- {Point 1}
+- {Point 2}
 
-Quick prep: {One suggestion based on context}
+Questions:
+- {Question 1}
+- {Question 2}
 ```
-
-Keep it short — this is a heads-up, not a full dossier.
 
 ## Notes
 
-- Only triggers when there's an external person
-- Skips routine internal meetings
-- Great for sales calls, investor meetings, interviews, partnerships
+- Keep it short. This is a heads-up, not a research paper.
+- Only do full research for external people or high-stakes meetings.
+- Store prep docs so future runs can reference past context.
