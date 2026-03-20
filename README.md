@@ -10,7 +10,16 @@
 ClawFlows is a powerful workflow system for OpenClaw. <br/>
 Includes 101 prebuilt community workflows you can enable in 1 click.
 
-Have your OpenClaw become even more incredibly useful in 10 seconds.
+### Why ClawFlows instead of built-in memory/heartbeat/cron?
+
+- **101 ready-to-go workflows** — no writing prompts from scratch, just `enable` and go
+- **Battle-tested instructions** — each workflow has guardrails, safety rules, and output formats so the agent doesn't hallucinate steps or forget things
+- **Composable** — workflows can call each other, share data, and build on each other's output
+- **Portable** — your workflows live in version-controlled files, not locked inside one app's memory
+- **Community-powered** — browse what others have built, submit your own, `clawflows update` to get the latest
+- **Customizable** — `clawflows edit` any community workflow to make it yours without losing updates
+
+<br>
 
 Some examples:
 - 📧 **Process my email** — Junk unsubscribed, noise archived, important stuff summarized. Your inbox, handled.
