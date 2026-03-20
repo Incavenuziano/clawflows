@@ -16,10 +16,9 @@ set -euo pipefail
 #      for due workflows — this is how scheduled workflows like morning
 #      briefings run automatically)
 #   5. Restores from backup if a previous install exists
-#   6. Enables the Essentials Pack (4 starter workflows) if no backup restored
-#   7. Enables auto-updates to keep community workflows current (like a
-#      package manager — pulls latest via git)
-#   8. Syncs AGENTS.md so the agent knows about available workflows
+#   6. Enables auto-updates to keep community workflows current
+#   7. Syncs AGENTS.md so the agent knows about available workflows
+#   8. Offers the Essentials Pack (4 starter workflows) if no backup restored
 #
 # Nothing is installed outside ~/.local/bin and the OpenClaw workspace.
 # Uninstall everything cleanly anytime: clawflows uninstall
@@ -235,7 +234,59 @@ if [ -d "$BACKUP_DIR" ] && ls "$BACKUP_DIR"/*.tar.gz >/dev/null 2>&1; then
   fi
 fi
 
-# ── 7. Enable essentials ────────────────────────────────────────────────────
+# ── 7. Auto-enable update-clawflows ─────────────────────────────────────────
+# Keeps community workflows current by pulling latest via git, like a package
+# manager. Users can disable anytime with: clawflows disable update-clawflows
+
+if ! $NO_UPDATER; then
+  "$INSTALL_DIR/system/cli/clawflows" enable update-clawflows >/dev/null 2>&1 || true
+fi
+
+# ── 8. Sync AGENTS.md ───────────────────────────────────────────────────────
+# This writes the ClawFlows reference block into AGENTS.md so the agent knows
+# about all CLI commands, enabled workflows, how to create/share/run workflows.
+# After this, the agent should re-read AGENTS.md to pick up the new info.
+
+AGENTS_MD="${AGENTS_MD:-$_oc_workspace/AGENTS.md}"
+
+if [ -f "$AGENTS_MD" ]; then
+  "$BIN_TARGET" sync >/dev/null 2>&1
+  ok "Agent synced"
+else
+  info "No AGENTS.md found — skipping sync"
+fi
+
+# ── 9. Count workflows ──────────────────────────────────────────────────────
+
+workflow_count=0
+if [ -d "$INSTALL_DIR/workflows/available" ]; then
+  workflow_count=$( (ls -d "$INSTALL_DIR/workflows/available"/community/*/ "$INSTALL_DIR/workflows/available"/custom/*/ 2>/dev/null || true) | wc -l | tr -d ' ')
+fi
+
+# ── Done ─────────────────────────────────────────────────────────────────────
+
+echo ""
+printf "  ${GREEN}${BOLD}Done!${RESET} ${BOLD}$workflow_count workflows${RESET} available.\n"
+echo ""
+
+if $NEEDS_PATH; then
+  printf "  ${BOLD}To get started, open a new terminal tab (⌘T) or run:${RESET}\n"
+  echo ""
+  printf "    ${YELLOW}${BOLD}export PATH=\"%s:\$PATH\"${RESET}\n" "$BIN_DIR"
+  echo ""
+  printf "  ${BOLD}Then:${RESET}\n"
+  echo ""
+  printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
+else
+  printf "  ${BOLD}Next steps:${RESET}\n"
+  echo ""
+  printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
+fi
+printf "    ${CYAN}clawflows enable ${DIM}<name>${RESET}          Turn one on\n"
+printf "    ${CYAN}clawflows update${RESET}                   Pull latest workflows\n"
+echo ""
+
+# ── Essentials ───────────────────────────────────────────────────────────────
 # If no backup was restored, enable the 4 starter workflows so the user has
 # something useful right away. They can disable any of them anytime with:
 # clawflows disable <name>
@@ -270,38 +321,6 @@ if ! $RESTORED_BACKUP && [ -t 1 ]; then
   fi
 fi
 
-# ── 8. Auto-enable update-clawflows ─────────────────────────────────────────
-# Keeps community workflows current by pulling latest via git, like a package
-# manager. Users can disable anytime with: clawflows disable update-clawflows
-
-if ! $NO_UPDATER; then
-  "$INSTALL_DIR/system/cli/clawflows" enable update-clawflows >/dev/null 2>&1 || true
-  ok "Auto-updater enabled (keeps workflows fresh — disable anytime with: clawflows disable update-clawflows)"
-else
-  info "Auto-updater skipped (--no-updater flag)"
-fi
-
-# ── 9. Sync AGENTS.md ───────────────────────────────────────────────────────
-# This writes the ClawFlows reference block into AGENTS.md so the agent knows
-# about all CLI commands, enabled workflows, how to create/share/run workflows.
-# After this, the agent should re-read AGENTS.md to pick up the new info.
-
-AGENTS_MD="${AGENTS_MD:-$_oc_workspace/AGENTS.md}"
-
-if [ -f "$AGENTS_MD" ]; then
-  "$BIN_TARGET" sync >/dev/null 2>&1
-  ok "Agent synced — AGENTS.md updated with ClawFlows commands and workflows"
-else
-  info "No AGENTS.md found — skipping sync"
-fi
-
-# ── 10. Count workflows ─────────────────────────────────────────────────────
-
-workflow_count=0
-if [ -d "$INSTALL_DIR/workflows/available" ]; then
-  workflow_count=$( (ls -d "$INSTALL_DIR/workflows/available"/community/*/ "$INSTALL_DIR/workflows/available"/custom/*/ 2>/dev/null || true) | wc -l | tr -d ' ')
-fi
-
 # ── Try it now ───────────────────────────────────────────────────────────────
 
 if [ -t 1 ]; then
@@ -320,29 +339,6 @@ printf "  ${YELLOW}⭐ If you're enjoying ClawFlows, a star would absolutely mak
 printf "  ${DIM}Dave Happy Minion worked really hard on this — it would mean a lot to him 🍌${RESET}\n"
 printf "  ${DIM}Plus, you'll get notified when new workflows drop!${RESET}\n"
 printf "    ${CYAN}https://github.com/nikilster/clawflows${RESET}\n"
-echo ""
-
-# ── Done ─────────────────────────────────────────────────────────────────────
-
-echo ""
-printf "  ${GREEN}${BOLD}Done!${RESET} ${BOLD}$workflow_count workflows${RESET} available.\n"
-echo ""
-
-if $NEEDS_PATH; then
-  printf "  ${BOLD}To get started, open a new terminal tab (⌘T) or run:${RESET}\n"
-  echo ""
-  printf "    ${YELLOW}${BOLD}export PATH=\"%s:\$PATH\"${RESET}\n" "$BIN_DIR"
-  echo ""
-  printf "  ${BOLD}Then:${RESET}\n"
-  echo ""
-  printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
-else
-  printf "  ${BOLD}Next steps:${RESET}\n"
-  echo ""
-  printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
-fi
-printf "    ${CYAN}clawflows enable ${DIM}<name>${RESET}          Turn one on\n"
-printf "    ${CYAN}clawflows update${RESET}                   Pull latest workflows\n"
 echo ""
 
 # If running without a terminal (agent context), print a note for the agent
