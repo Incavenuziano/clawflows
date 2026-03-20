@@ -9,18 +9,6 @@
 
 ClawFlows is a powerful workflow system for OpenClaw. <br/>
 Includes 101 prebuilt community workflows you can enable in 1 click.
-
-### Why not just use memory files, heartbeat, and cron?
-
-- **One workflow = one file.** Plain text, easy to create, easy to read, easy to share. No scattered instructions across memory files, heartbeat configs, and cron entries.
-- **Deterministic execution.** Scripts handle specific functions reliably. No guessing, no variation. The agent follows the same steps every time. Unlike your coworker Dave.
-- **Dead simple scheduling and creation.** Add `schedule: "8am"` and it just runs. Plus 101 prebuilt workflows so you don't have to write anything from scratch.
-- **Easily shareable.** Share workflows between teams, communities, or projects. Someone solves a problem once, everyone benefits. It's like open source, but for making your robot do things.
-- **Efficient and lightweight.** One workflow library serves all your agents. No bloated prompts eating up context windows. Your token bill will thank you. Your accountant might actually smile.
-- **No duplication.** Common patterns live in one place. Update once, apply everywhere. No more copy-pasting the same steps across different automations like some kind of caveman.
-- **Version controlled.** Track changes, roll back mistakes, collaborate with others. Workflows evolve with your needs. Git blame your past self when things break.
-- **Agent-agnostic.** Works with Claude Code, OpenClaw, or any agent that supports the Agent Skills spec. Switch agents without rewriting everything. Commitment issues? We got you.
-
 <br>
 
 Some examples:
@@ -31,6 +19,13 @@ Some examples:
 - 🔨 **Build something while I sleep** (midnight) — Picks an idea, builds it overnight, hands you a finished project in the morning.
 
 <br>
+
+
+Benefits
+- **Easily Create Workflows** Plain text, easy to create, easy to read, easy to share.
+- **Reliable & Deterministic** Works every time. No scattered instructions across memory, heartbeat, and cron.
+- **Versioned & Reusable Workflows** Easily modify, save, and rollback your workflows
+- **Community Workflows** 100+ prebuilt workflows. Easily build & share workflows with your friends!
 
 ## 🚀 Get Started In 10 Seconds
 
