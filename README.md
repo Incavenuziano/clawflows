@@ -24,11 +24,11 @@ Includes 101 prebuilt community workflows you can enable in 1 click.
 <br>
 
 Some examples:
-- 📧 **Process my email** — Junk unsubscribed, noise archived, important stuff summarized. Your inbox, handled.
-- ☀️ **Morning briefing** — Weather, calendar, priorities, and fires — delivered before you open your eyes.
-- 🛏️ **Sleep mode** — Every light off, music stopped, thermostat down, bedroom fan on. One command. Five systems. Done.
-- 🎯 **Prep for my meeting** — Attendees researched, history pulled, talking points written. Ready before you are.
-- 🔨 **Build something while I sleep** — Picks an idea, builds it overnight, hands you a finished project in the morning.
+- 📧 **Process my email** (9am, 1pm, 5pm) — Junk unsubscribed, noise archived, important stuff summarized. Your inbox, handled.
+- ☀️ **Morning briefing** (7am) — Weather, calendar, priorities, and fires — delivered before you open your eyes.
+- 🛏️ **Sleep mode** (10pm) — Every light off, music stopped, thermostat down, bedroom fan on. One command. Five systems. Done.
+- 🎯 **Prep for my meeting** (every 30 min) — Attendees researched, history pulled, talking points written. Ready before you are.
+- 🔨 **Build something while I sleep** (midnight) — Picks an idea, builds it overnight, hands you a finished project in the morning.
 
 <br>
 
@@ -52,17 +52,6 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 ```
 
 Your agent will install everything and ask which workflows you want to enable. Note: risk here that agent doesn't install everything fully - for 100% accuracy do Option 1.
-
-<br>
-
-## The Essentials
-
-| Workflow | When | What it does |
-|----------|------|--------------|
-| ✨ [send-morning-inspiration](workflows/available/community/send-morning-inspiration/) | 7am | Inspirational quote themed to your goals |
-| ☀️ [send-morning-briefing](workflows/available/community/send-morning-briefing/) | 7am | Weather, calendar, priorities, overnight alerts |
-| 📧 [check-email](workflows/available/community/check-email/) | 2-3x/day | Categorize inbox and surface what needs attention |
-| 📅 [check-calendar](workflows/available/community/check-calendar/) | Morning + evening | 48-hour radar with conflicts and prep notes |
 
 <br>
 
