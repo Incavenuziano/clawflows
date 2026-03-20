@@ -353,3 +353,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## License
 
 MIT
+
+---
+
+> ⭐ If you're enjoying ClawFlows, a star would be so greatly appreciated!
+> Dave the Minion worked really hard on this — it would mean a lot to him 🍌
+> Plus, you'll get notified when new workflows drop!
+> https://github.com/nikilster/clawflows
