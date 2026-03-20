@@ -47,6 +47,7 @@ INSTALL_DIR="$_oc_workspace/clawflows"
 
 # ── Flags ─────────────────────────────────────────────────────────────────
 NO_UPDATER=false
+NEEDS_PATH=false
 for arg in "$@"; do
   case "$arg" in
     --no-updater) NO_UPDATER=true ;;
@@ -153,10 +154,7 @@ if ! $path_ok; then
     fi
   fi
 
-  echo ""
-  printf "  ${YELLOW}${BOLD}  ⚠️  Run this now so clawflows works in this terminal:${RESET}\n"
-  printf "  ${BOLD}     export PATH=\"%s:\$PATH\"${RESET}\n" "$BIN_DIR"
-  echo ""
+  NEEDS_PATH=true
 else
   ok "PATH already configured"
 fi
@@ -300,7 +298,7 @@ fi
 
 workflow_count=0
 if [ -d "$INSTALL_DIR/workflows/available" ]; then
-  workflow_count=$(ls -d "$INSTALL_DIR/workflows/available"/community/*/ "$INSTALL_DIR/workflows/available"/custom/*/ 2>/dev/null | wc -l | tr -d ' ')
+  workflow_count=$( (ls -d "$INSTALL_DIR/workflows/available"/community/*/ "$INSTALL_DIR/workflows/available"/custom/*/ 2>/dev/null || true) | wc -l | tr -d ' ')
 fi
 
 # ── Star prompt ──────────────────────────────────────────────────────────────
@@ -317,9 +315,17 @@ echo ""
 echo ""
 printf "  ${GREEN}${BOLD}Done!${RESET} ${BOLD}$workflow_count workflows${RESET} available.\n"
 echo ""
-printf "  ${BOLD}Next steps:${RESET}\n"
-echo ""
-printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
+
+if $NEEDS_PATH; then
+  printf "  ${BOLD}To get started, run:${RESET}\n"
+  echo ""
+  printf "    ${YELLOW}${BOLD}export PATH=\"%s:\$PATH\"${RESET}        Set up your terminal\n" "$BIN_DIR"
+  printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
+else
+  printf "  ${BOLD}Next steps:${RESET}\n"
+  echo ""
+  printf "    ${CYAN}clawflows list${RESET}                     Browse all workflows\n"
+fi
 printf "    ${CYAN}clawflows enable ${DIM}<name>${RESET}          Turn one on\n"
 printf "    ${CYAN}clawflows update${RESET}                   Pull latest workflows\n"
 echo ""
