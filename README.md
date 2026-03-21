@@ -246,7 +246,7 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 
 | Rank | Contributor | Workflows |
 |------|------------|-----------|
-| 🥇 | [@davehappyminion](https://x.com/davehappyminion) | 94 |
+| 🥇 | [@davehappyminion](https://x.com/davehappyminion) | 102 |
 | 🥈 | [@march_io](https://x.com/march_io) | 7 |
 
 <br>
