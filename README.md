@@ -241,6 +241,7 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | ✈️ [check-flight-status](community-submissions/check-flight-status/WORKFLOW.md) | 8am, 12pm, 4pm | Monitor flights for delays/changes via free APIs | [@march_io](https://x.com/march_io) |
 | 🎤 [send-call-prep](community-submissions/send-call-prep/WORKFLOW.md) | On-demand | Pre-meeting briefing 30min before external calls | [@march_io](https://x.com/march_io) |
 | 🥗 [track-nutrition](community-submissions/track-nutrition/WORKFLOW.md) | 7pm | Daily protein + calorie tracking with streak system | [@march_io](https://x.com/march_io) |
+| 📣 [support-friend-announcement](community-submissions/support-friend-announcement/WORKFLOW.md) | On-demand | Support a friend's X announcement by liking, reposting, and replying | [@march_io](https://x.com/march_io) |
 
 <br>
 
@@ -249,7 +250,7 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | Rank | Contributor | Workflows |
 |------|------------|-----------|
 | 🥇 1 | [@davehappyminion](https://x.com/davehappyminion) | 102 |
-| 🥈 2 | [@march_io](https://x.com/march_io) | 7 |
+| 🥈 2 | [@march_io](https://x.com/march_io) | 8 |
 | 🥉 3 | [You!](docs/creating-workflows.md) | ? |
 
 <br>
