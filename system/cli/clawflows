@@ -1206,7 +1206,8 @@ ${desc:+$desc
 }"
 
   if [ -n "$share_url" ]; then
-    share_text="${share_text}Get it: clawflows import $share_url"
+    share_text="${share_text}Get it: clawflows import $share_url
+Need ClawFlows? curl -fsSL https://raw.githubusercontent.com/nikilster/clawflows/main/system/install.sh | bash"
   else
     share_text="${share_text}To share this workflow, upload WORKFLOW.md to a gist or repo, then share:
   clawflows import <your-url>"
@@ -1275,11 +1276,21 @@ cmd_import() {
   [ -n "$wf_name" ] || { rm -f "$tmpfile"; die "downloaded file is missing required 'name' field in frontmatter"; }
   [ -n "$wf_desc" ] || { rm -f "$tmpfile"; die "downloaded file is missing required 'description' field in frontmatter"; }
 
-  # Show what was downloaded
+  # Show what was downloaded and warn about external source
   echo ""
   echo "  ${wf_emoji:+$wf_emoji }$wf_name"
   [ -n "$wf_desc" ] && echo "  $wf_desc"
   echo ""
+  echo "  ! Downloaded from: $url"
+  echo "  ! Review workflows before enabling — they run with your agent's permissions."
+  echo ""
+  printf "  Save this workflow? [y/N] "
+  read -r save_confirm
+  if [ "$save_confirm" != "y" ] && [ "$save_confirm" != "Y" ]; then
+    echo "  Cancelled."
+    rm -f "$tmpfile"
+    return
+  fi
 
   # Check for conflicts
   local dest_dir="$CUSTOM_DIR/$wf_name"

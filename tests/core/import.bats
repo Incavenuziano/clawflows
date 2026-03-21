@@ -130,6 +130,27 @@ EOF
 }
 
 # ============================================================================
+# Security Warning
+# ============================================================================
+
+@test "import: shows security warning with source URL" {
+    local wf_file="${TEST_TMPDIR}/good.md"
+    _create_test_wf_file "$wf_file" "warn-wf" "x" "A workflow"
+    _mock_curl_with_file "$wf_file"
+
+    # Pipe "n" to decline save
+    output="$(echo "n" | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
+    status=$?
+
+    [ "$status" -eq 0 ]
+    echo "$output" | grep -q "Downloaded from:"
+    echo "$output" | grep -q "Review workflows before enabling"
+    echo "$output" | grep -q "Cancelled"
+    # Should NOT have saved
+    [ ! -d "${CUSTOM_DIR}/warn-wf" ]
+}
+
+# ============================================================================
 # Import to Custom Directory
 # ============================================================================
 
@@ -139,8 +160,8 @@ EOF
     _mock_curl_with_file "$wf_file"
     mock_openclaw "missing"
 
-    # Pipe "n" to decline enable, use subshell to capture output
-    output="$(echo "n" | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
+    # Pipe "y" to save, "n" to decline enable
+    output="$(printf 'y\nn\n' | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
     status=$?
 
     [ "$status" -eq 0 ]
@@ -155,8 +176,8 @@ EOF
     _mock_curl_with_file "$wf_file"
     mock_openclaw "missing"
 
-    # Pipe empty line (default is Y for enable)
-    output="$(echo "" | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
+    # Pipe "y" to save, empty line for enable (default Y)
+    output="$(printf 'y\n\n' | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
     status=$?
 
     [ "$status" -eq 0 ]
@@ -175,8 +196,8 @@ EOF
     _create_test_wf_file "$wf_file" "conflict-wf" "x" "New version"
     _mock_curl_with_file "$wf_file"
 
-    # Pipe "n" to decline overwrite
-    output="$(echo "n" | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
+    # Pipe "y" to save, "n" to decline overwrite
+    output="$(printf 'y\nn\n' | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
     status=$?
 
     [ "$status" -eq 0 ]
@@ -192,8 +213,8 @@ EOF
     _mock_curl_with_file "$wf_file"
     mock_openclaw "missing"
 
-    # Pipe "y" then "n" (yes to overwrite, no to enable)
-    output="$(printf 'y\nn\n' | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
+    # Pipe "y" to save, "y" to overwrite, "n" to decline enable
+    output="$(printf 'y\ny\nn\n' | "$TEST_CLI" import "https://example.com/WORKFLOW.md" 2>&1)"
     status=$?
 
     [ "$status" -eq 0 ]
@@ -205,7 +226,7 @@ EOF
 # Share Output
 # ============================================================================
 
-@test "share: community workflow outputs import command" {
+@test "share: community workflow outputs import command with install hint" {
     create_community_workflow "share-test" "x" "A shareable workflow"
 
     run_clawflows share share-test
@@ -213,6 +234,8 @@ EOF
     assert_output --partial "clawflows import"
     assert_output --partial "raw.githubusercontent.com"
     assert_output --partial "share-test"
+    assert_output --partial "Need ClawFlows?"
+    assert_output --partial "install.sh"
 }
 
 @test "share: custom workflow shows upload instructions" {
