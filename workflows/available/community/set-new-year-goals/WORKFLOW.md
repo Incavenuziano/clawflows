@@ -2,7 +2,7 @@
 name: set-new-year-goals
 emoji: 🎆
 description: Annual goal-setting exercise — reflect on the past year, celebrate wins, acknowledge what didn't work, and set clear intentions for the year ahead.
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Set New Year Goals

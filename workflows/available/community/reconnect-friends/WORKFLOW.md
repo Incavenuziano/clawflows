@@ -3,7 +3,7 @@ name: reconnect-friends
 emoji: 👋
 description: Weekly nudge to reach out to friends you haven't talked to in a while
 schedule: "sunday 10am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Reconnect With Friends

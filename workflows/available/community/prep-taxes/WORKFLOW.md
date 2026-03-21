@@ -2,7 +2,7 @@
 name: prep-taxes
 emoji: 🧾
 description: Tax document checklist — helps you gather W-2s, 1099s, receipts, and track what's collected vs missing
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Prep Your Taxes

@@ -3,7 +3,7 @@ name: check-price-drops
 emoji: 📉
 description: Monitors your wishlist items for price drops — scans promo emails and checks for deals on things you want
 schedule: "9am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Check for Price Drops

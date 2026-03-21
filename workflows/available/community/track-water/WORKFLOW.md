@@ -3,7 +3,7 @@ name: track-water
 emoji: 💧
 description: Daily hydration check-ins to help you drink enough water
 schedule: "9am, 12pm, 3pm, 6pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Track Water Intake

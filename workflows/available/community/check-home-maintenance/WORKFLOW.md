@@ -3,7 +3,7 @@ name: check-home-maintenance
 emoji: 🏠
 description: Monthly home upkeep reminders so small tasks don't become big problems
 schedule: "1st 9am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Check Home Maintenance

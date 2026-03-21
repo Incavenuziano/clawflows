@@ -3,7 +3,7 @@ name: daily-writing-prompt
 emoji: ✍️
 description: A fresh creative writing prompt every morning to spark your imagination
 schedule: "7am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Daily Writing Prompt

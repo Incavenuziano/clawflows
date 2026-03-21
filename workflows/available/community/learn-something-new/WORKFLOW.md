@@ -2,7 +2,7 @@
 name: learn-something-new
 emoji: 📚
 description: Daily micro-learning — picks a topic from your interests and delivers a 2-minute lesson with one key takeaway you can use today.
-author: @openclaw
+author: @davehappyminion
 schedule: "8am"
 ---
 

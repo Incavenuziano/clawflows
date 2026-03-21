@@ -3,7 +3,7 @@ name: plan-week
 emoji: 📅
 description: Sunday evening weekly planning — reviews your calendar, sets priorities, and preps you for Monday
 schedule: "sunday 6pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Plan Your Week

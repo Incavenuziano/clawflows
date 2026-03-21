@@ -2,7 +2,7 @@
 name: spring-clean
 emoji: 🧽
 description: Seasonal deep-clean checklist — a room-by-room guide for a thorough clean, with progress tracking and a pace of one room per day.
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Spring Clean

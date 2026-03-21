@@ -2,7 +2,7 @@
 name: set-quarterly-goals
 emoji: 🏔️
 description: Quarterly goal-setting — review last quarter, set 3-5 goals with measurable outcomes for the next one
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Set Quarterly Goals

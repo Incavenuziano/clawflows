@@ -3,7 +3,7 @@ name: schedule-chores
 emoji: 🧹
 description: Weekly chore rotation that keeps your household running smoothly
 schedule: "saturday 9am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Schedule Chores

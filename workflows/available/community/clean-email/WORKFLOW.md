@@ -2,7 +2,7 @@
 name: clean-email
 emoji: 📧
 description: Inbox cleanup assistant — finds newsletters you never read, promotional emails piling up, and old threads, then suggests unsubscribes and archive actions.
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Clean Email

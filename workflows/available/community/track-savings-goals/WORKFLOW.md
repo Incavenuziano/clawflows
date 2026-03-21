@@ -3,7 +3,7 @@ name: track-savings-goals
 emoji: 🎯
 description: Monthly savings progress tracker — shows how close you are to each savings target
 schedule: "1st 9am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Track Your Savings Goals

@@ -2,7 +2,7 @@
 name: prep-back-to-school
 emoji: 📝
 description: Back-to-school preparation — supply lists, schedule setup, teacher info, lunch planning, and carpool coordination. The full parent survival kit.
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Prep Back to School

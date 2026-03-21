@@ -2,7 +2,7 @@
 name: check-privacy
 emoji: 🔒
 description: Privacy audit — reviews app permissions, checks which services have your data, and suggests ways to tighten your privacy settings.
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Check Privacy

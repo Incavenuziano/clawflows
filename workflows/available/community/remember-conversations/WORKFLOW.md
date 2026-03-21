@@ -2,7 +2,7 @@
 name: remember-conversations
 emoji: 🧠
 description: Log key takeaways, promises, and personal details from conversations and meetings
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Remember Conversations

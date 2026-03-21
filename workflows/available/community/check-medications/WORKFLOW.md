@@ -3,7 +3,7 @@ name: check-medications
 emoji: 💊
 description: Medication reminders and refill tracking so you never miss a dose
 schedule: "8am, 8pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Check Medications

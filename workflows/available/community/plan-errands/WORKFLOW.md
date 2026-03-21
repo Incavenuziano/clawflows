@@ -2,7 +2,7 @@
 name: plan-errands
 emoji: 🗺️
 description: Saturday errand planner — collects your pending errands, groups them by location, suggests an efficient route, and estimates total time.
-author: @openclaw
+author: @davehappyminion
 schedule: "saturday 8am"
 ---
 

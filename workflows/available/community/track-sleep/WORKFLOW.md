@@ -3,7 +3,7 @@ name: track-sleep
 emoji: 😴
 description: Evening sleep logger that tracks your rest and shows weekly trends
 schedule: "9pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Track Sleep

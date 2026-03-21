@@ -2,7 +2,7 @@
 name: backup-important-files
 emoji: 💾
 description: Weekly backup check — verifies your critical documents, photos, and files are backed up, and flags anything new that isn't protected yet.
-author: @openclaw
+author: @davehappyminion
 schedule: "sunday 3am"
 ---
 

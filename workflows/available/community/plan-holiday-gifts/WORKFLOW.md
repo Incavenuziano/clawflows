@@ -2,7 +2,7 @@
 name: plan-holiday-gifts
 emoji: 🎁
 description: Holiday gift planning and tracking — build a gift list with budgets, track what's bought vs. pending, and get ideas based on what you know about each person.
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Plan Holiday Gifts

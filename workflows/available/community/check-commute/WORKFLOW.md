@@ -3,7 +3,7 @@ name: check-commute
 emoji: 🚗
 description: Morning commute briefing with traffic, transit delays, weather, and best departure time
 schedule: "7am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Check Commute

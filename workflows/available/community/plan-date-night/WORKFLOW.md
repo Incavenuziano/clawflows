@@ -3,7 +3,7 @@ name: plan-date-night
 emoji: 💑
 description: Weekly date night ideas based on your budget, mood, and what's nearby
 schedule: "wednesday 12pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Plan Date Night

@@ -3,7 +3,7 @@ name: stretch-reminder
 emoji: 🧘
 description: Movement break reminders with simple stretches during work hours
 schedule: "10am, 2pm, 4pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Stretch Reminder

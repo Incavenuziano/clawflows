@@ -2,7 +2,7 @@
 name: check-car-maintenance
 emoji: 🚗
 description: Monthly car care reminders — tracks oil changes, tire rotations, registration, inspections, insurance, and mileage milestones so nothing sneaks up on you.
-author: @openclaw
+author: @davehappyminion
 schedule: "1st 9am"
 ---
 

@@ -2,7 +2,7 @@
 name: review-week-git
 emoji: 💻
 description: Weekly dev review — summarizes git commits, PRs, code reviews, and technical decisions into a developer-focused end-of-week report.
-author: @openclaw
+author: @davehappyminion
 schedule: "friday 5pm"
 ---
 

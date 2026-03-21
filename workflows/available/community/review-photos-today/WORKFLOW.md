@@ -3,7 +3,7 @@ name: review-photos-today
 emoji: 📸
 description: "On this day" photo memories — see what you were doing on this date in years past
 schedule: "8am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Review Photos From Today

@@ -2,7 +2,7 @@
 name: review-month
 emoji: 📊
 description: Monthly reflection — what went well, what didn't, progress on goals, and adjustments for next month
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Review Your Month

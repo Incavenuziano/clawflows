@@ -2,7 +2,7 @@
 name: plan-trip
 emoji: ✈️
 description: Research and plan a trip with flights, hotels, activities, and a day-by-day itinerary
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Plan a Trip

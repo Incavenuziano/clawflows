@@ -2,7 +2,7 @@
 name: log-dreams
 emoji: 🌙
 description: Morning dream journal — prompts you to describe last night's dream, saves entries over time, and tracks recurring themes and symbols.
-author: @openclaw
+author: @davehappyminion
 schedule: "7am"
 ---
 

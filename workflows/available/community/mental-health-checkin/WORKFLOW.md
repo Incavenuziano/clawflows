@@ -3,7 +3,7 @@ name: mental-health-checkin
 emoji: 🧠
 description: Daily mood and energy check-in to help you notice patterns and take care of yourself
 schedule: "6pm"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Mental Health Check-In

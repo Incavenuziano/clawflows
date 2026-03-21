@@ -3,7 +3,7 @@ name: block-deep-work
 emoji: 🎧
 description: Protects focus time on your calendar — finds gaps in fragmented days and blocks deep work windows
 schedule: "8am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Block Deep Work Time

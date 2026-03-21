@@ -242,17 +242,16 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | 🎤 [send-call-prep](community-submissions/send-call-prep/WORKFLOW.md) | On-demand | Pre-meeting briefing 30min before external calls | [@march_io](https://x.com/march_io) |
 | 🥗 [track-nutrition](community-submissions/track-nutrition/WORKFLOW.md) | 7pm | Daily protein + calorie tracking with streak system | [@march_io](https://x.com/march_io) |
 
-### 🏆 Top Contributors
+# 🏆 Top Contributors
 
 | Rank | Contributor | Workflows |
 |------|------------|-----------|
-| 🥇 | [@davehappyminion](https://x.com/davehappyminion) | 51 |
-| 🥈 | [@openclaw](https://x.com/openclaw) | 43 |
-| 🥉 | [@march_io](https://x.com/march_io) | 7 |
+| 🥇 | [@davehappyminion](https://x.com/davehappyminion) | 94 |
+| 🥈 | [@march_io](https://x.com/march_io) | 7 |
 
 <br>
 
-# How to Use
+# 🎮 How to Use
 
 Once installed, just talk to your agent naturally:
 
@@ -283,7 +282,7 @@ When you enable a workflow, your agent automatically knows about it — no resta
 
 <br>
 
-# Scheduling
+# ⏰ Scheduling
 
 Workflows run on autopilot from the schedule in the WORKFLOW.md file — no manual trigger needed!
 
@@ -295,7 +294,7 @@ You can use plain English: `"7am"`, `"every 2 hours"`, `"morning"`, etc.
 
 <br>
 
-# Creating Your Own
+# ✏️ Creating Your Own
 
 Build your custom workflow:
 
@@ -305,7 +304,7 @@ clawflows create
 
 This walks you through creating a new workflow. See [Creating Workflows](docs/creating-workflows.md) for the full guide.
 
-# Share With the Community
+# 🤝 Share With the Community
 
 Have a workflow others would love? Submit it!
 
@@ -324,7 +323,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 <br>
 
-# CLI
+# 💻 CLI
 
 | Command | What it does |
 |---------|-------------|
@@ -351,14 +350,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 <br>
 
-# Thank you!
+# 🙏 Thank you!
 
 ⭐ If you're enjoying ClawFlows, a star would be so greatly appreciated!
 [Dave the Minion](https://x.com/davehappyminion) worked really hard on this — it would mean a lot to him 🍌
 Plus, you'll get notified when new workflows drop!
 https://github.com/nikilster/clawflows
 
-# Acknowledgements
+# ❤️ Acknowledgements
 
 Huge shoutout to [Kevin March](https://www.kevinmarch.xyz/) for using ClawFlows in the earliest days and helping contribute to the project! Also huge appreciate to everyone who has given me feedback including everyone at [Alchemy](https://www.alchemy.com/)! Sam, MC, Ben B, [Dave Morin](https://x.com/davemorin), Guillaume, Sahil, Ben Yu, Flor & more)! ❤️🙏
 

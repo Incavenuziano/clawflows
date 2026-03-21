@@ -2,7 +2,7 @@
 name: prep-next-meeting
 emoji: 🔍
 description: Meeting prep — researches attendees, pulls context from past meetings and emails, and generates talking points before your next meeting.
-author: @openclaw
+author: @davehappyminion
 schedule: "every 30 minutes"
 ---
 

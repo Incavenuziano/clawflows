@@ -3,7 +3,7 @@ name: track-loyalty-programs
 emoji: ✨
 description: Monthly check on your loyalty points, miles, and rewards balances
 schedule: "1st 9am"
-author: @openclaw
+author: @davehappyminion
 ---
 
 # Track Loyalty Programs
