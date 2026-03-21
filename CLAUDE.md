@@ -204,3 +204,11 @@ When a PR adds workflows to `community-submissions/`, follow these steps after m
 6. **Commit and push** — Stage only `README.md`, commit, and push.
 
 **Finding author X handles**: Check the workflow's `author:` field first. If it's a GitHub username, run `gh api users/<username> --jq '.twitter_username // .bio'` to find their X handle from their GitHub profile.
+
+### README Formatting Conventions
+- All H1 headings (`#`) must have an emoji prefix and a `<br>` tag on the line before them (with a blank line between the `<br>` and the heading)
+- Workflow tables have 3 columns: `Workflow | Schedule | What it does` (and `Author` for community-created)
+- Schedule column shows the time from the workflow's `schedule:` frontmatter field, or "On-demand" if absent
+- The `🏆 Top Contributors` leaderboard uses ranked rows with medal emojis (🥇🥈🥉) plus numbers. The last row is always `🥉 N | [You!](docs/creating-workflows.md) | ?` as a CTA
+- To count workflows per author, use `grep -rl 'author:.*@handle' workflows/available/community/ | wc -l` — don't manually count
+- All workflow authors should be `@davehappyminion` (not `@openclaw`)

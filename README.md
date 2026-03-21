@@ -242,6 +242,8 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | 🎤 [send-call-prep](community-submissions/send-call-prep/WORKFLOW.md) | On-demand | Pre-meeting briefing 30min before external calls | [@march_io](https://x.com/march_io) |
 | 🥗 [track-nutrition](community-submissions/track-nutrition/WORKFLOW.md) | 7pm | Daily protein + calorie tracking with streak system | [@march_io](https://x.com/march_io) |
 
+<br>
+
 # 🏆 Top Contributors
 
 | Rank | Contributor | Workflows |
@@ -305,6 +307,8 @@ clawflows create
 
 This walks you through creating a new workflow. See [Creating Workflows](docs/creating-workflows.md) for the full guide.
 
+<br>
+
 # 🤝 Share With the Community
 
 Have a workflow others would love? Submit it!
@@ -357,6 +361,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 [Dave the Minion](https://x.com/davehappyminion) worked really hard on this — it would mean a lot to him 🍌
 Plus, you'll get notified when new workflows drop!
 https://github.com/nikilster/clawflows
+
+<br>
 
 # ❤️ Acknowledgements
 
