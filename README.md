@@ -228,7 +228,8 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 |----------|----------|-------------|
 | 🔄 [update-clawflows](workflows/available/community/update-clawflows/WORKFLOW.md) | 9am | Pull latest workflows from GitHub and check for announcements |
 
-### 🌐 Community Created
+
+# 🌎 Community Created Workflows
 
 | Workflow | Schedule | What it does | Author |
 |----------|----------|-------------|--------|
