@@ -467,6 +467,49 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  .paste-reminder {
+    position: fixed; inset: 0; z-index: 600;
+    background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .2s;
+  }
+  .paste-reminder.show { opacity: 1; pointer-events: auto; }
+  .paste-reminder-box {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px 40px;
+    text-align: center; max-width: 380px;
+  }
+  .paste-reminder-icon { font-size: 36px; margin-bottom: 12px; }
+  .paste-reminder-title {
+    font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;
+  }
+  .paste-reminder-sub {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;
+  }
+  .paste-reminder-kbd {
+    display: inline-block; background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 10px; font-family: var(--mono);
+    font-size: 13px; font-weight: 600; color: var(--text-primary);
+  }
+  .paste-reminder-actions {
+    margin-top: 20px; display: flex; gap: 8px; justify-content: center;
+  }
+  .paste-reminder-x {
+    padding: 10px 24px; border-radius: var(--radius-sm);
+    border: 1px solid var(--text-primary); background: var(--text-primary);
+    color: var(--bg-base); font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: var(--sans);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .paste-reminder-x:hover { opacity: .9; }
+  .paste-reminder-dismiss {
+    padding: 10px 20px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg-raised);
+    color: var(--text-secondary); font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: var(--sans);
+  }
+  .paste-reminder-dismiss:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
   /* ── Entrance animation ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
@@ -678,6 +721,20 @@
 </div>
 
 <div class="toast" id="toast"></div>
+<div class="paste-reminder" id="pasteReminder">
+  <div class="paste-reminder-box">
+    <div class="paste-reminder-icon">📋</div>
+    <div class="paste-reminder-title" id="pasteReminderTitle">Image copied to clipboard!</div>
+    <div class="paste-reminder-sub" id="pasteReminderSub">Paste it into your tweet with</div>
+    <span class="paste-reminder-kbd">⌘V</span>
+    <div class="paste-reminder-actions">
+      <button class="paste-reminder-x" id="pasteReminderX">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Go to X</button>
+      <button class="paste-reminder-dismiss" id="pasteReminderDismiss">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <script>
 var WORKFLOWS = [];
@@ -908,17 +965,18 @@ function renderShareTab() {
     if (!shareBlob) { toast('Image not ready yet'); return; }
     var xUrl = 'https://x.com/intent/tweet?text=' + tweetText;
     if (navigator.clipboard && typeof ClipboardItem !== 'undefined') {
-      var item = new ClipboardItem({ 'image/png': shareBlob });
-      navigator.clipboard.write([item]).then(function() {
-        window.open(xUrl, '_blank');
-        toast('Image copied \u2014 paste it in your tweet!');
-      }).catch(function() {
-        window.open(xUrl, '_blank');
-        toast('Could not copy image \u2014 use Download Image instead');
-      });
+      try {
+        var item = new ClipboardItem({ 'image/png': Promise.resolve(shareBlob) });
+        navigator.clipboard.write([item]).then(function() {
+          showPasteReminder(xUrl);
+        }).catch(function() {
+          showPasteReminder(xUrl, 'Download the image and drag it into your tweet');
+        });
+      } catch(e) {
+        showPasteReminder(xUrl, 'Download the image and drag it into your tweet');
+      }
     } else {
-      window.open(xUrl, '_blank');
-      toast('Paste not supported \u2014 use Download Image to attach manually');
+      showPasteReminder(xUrl, 'Download the image and drag it into your tweet');
     }
   });
 
@@ -1132,7 +1190,8 @@ document.getElementById('overlay').addEventListener('click', closePanel);
 document.getElementById('pClose').addEventListener('click', closePanel);
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
-    if (document.getElementById('wfShareOverlay').classList.contains('open')) closeWfShare();
+    if (document.getElementById('pasteReminder').classList.contains('show')) dismissPasteReminder();
+    else if (document.getElementById('wfShareOverlay').classList.contains('open')) closeWfShare();
     else if (document.getElementById('createOverlay').classList.contains('open')) closeCreate();
     else closePanel();
   }
@@ -1172,6 +1231,31 @@ function toast(msg) {
   clearTimeout(toast._t);
   toast._t = setTimeout(function() { el.classList.remove('show'); }, 2000);
 }
+
+var _pasteReminderXUrl = '';
+function showPasteReminder(xUrl, altMsg) {
+  _pasteReminderXUrl = xUrl || '';
+  var el = document.getElementById('pasteReminder');
+  if (altMsg) {
+    document.getElementById('pasteReminderTitle').textContent = 'Almost there!';
+    document.getElementById('pasteReminderSub').textContent = altMsg;
+  } else {
+    document.getElementById('pasteReminderTitle').textContent = 'Image copied to clipboard!';
+    document.getElementById('pasteReminderSub').textContent = 'Paste it into your tweet with';
+  }
+  el.classList.add('show');
+}
+function dismissPasteReminder() {
+  document.getElementById('pasteReminder').classList.remove('show');
+}
+document.getElementById('pasteReminderDismiss').addEventListener('click', dismissPasteReminder);
+document.getElementById('pasteReminder').addEventListener('click', function(e) {
+  if (e.target === this) dismissPasteReminder();
+});
+document.getElementById('pasteReminderX').addEventListener('click', function() {
+  if (_pasteReminderXUrl) window.open(_pasteReminderXUrl, '_blank');
+  dismissPasteReminder();
+});
 
 function renderMd(text) {
   if (!text) return '';
@@ -1413,17 +1497,18 @@ document.getElementById('wfShareX').addEventListener('click', function() {
   if (!wfShareBlob) { toast('Image not ready yet'); return; }
   var xUrl = this.dataset.xUrl || 'https://x.com/intent/tweet';
   if (navigator.clipboard && typeof ClipboardItem !== 'undefined') {
-    var item = new ClipboardItem({ 'image/png': wfShareBlob });
-    navigator.clipboard.write([item]).then(function() {
-      window.open(xUrl, '_blank');
-      toast('Image copied \u2014 paste it in your tweet!');
-    }).catch(function() {
-      window.open(xUrl, '_blank');
-      toast('Could not copy image \u2014 use Download Image instead');
-    });
+    try {
+      var item = new ClipboardItem({ 'image/png': Promise.resolve(wfShareBlob) });
+      navigator.clipboard.write([item]).then(function() {
+        showPasteReminder(xUrl);
+      }).catch(function() {
+        showPasteReminder(xUrl, 'Download the image and drag it into your tweet');
+      });
+    } catch(e) {
+      showPasteReminder(xUrl, 'Download the image and drag it into your tweet');
+    }
   } else {
-    window.open(xUrl, '_blank');
-    toast('Paste not supported \u2014 use Download Image to attach manually');
+    showPasteReminder(xUrl, 'Download the image and drag it into your tweet');
   }
 });
 
