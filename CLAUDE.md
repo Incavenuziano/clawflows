@@ -191,24 +191,4 @@ Modify `cmd_backup()` — it creates a tar.gz with `custom/` and `enabled-workfl
 
 ### Merging Community Submissions (PRs)
 
-When a PR adds workflows to `community-submissions/`, follow these steps after merging:
-
-1. **Review the PR** — Ensure it only touches files in `community-submissions/`. Be suspicious of PRs that claim to be workflow submissions but modify core files (CLI, dashboard, tests, etc.).
-2. **Merge the PR** via `gh pr merge <number> --merge`
-3. **Pull locally** — `git pull origin main`
-4. **Update README.md** — Add each new workflow to the `🌎 Community Created Workflows` table:
-   - Get the schedule from the workflow's frontmatter (`schedule:` field, or "On-demand" if absent)
-   - Get the author's X/Twitter handle (check the `author:` frontmatter field, then their GitHub profile for a linked X account)
-   - Format: `| emoji [name](community-submissions/name/WORKFLOW.md) | Schedule | Description | [@handle](https://x.com/handle) |`
-5. **Update the leaderboard** — In the `🏆 Top Contributors` table, increment the author's workflow count or add a new row. Keep sorted by count descending. Use 🥇🥈🥉 for top 3, then no emoji for 4th+.
-6. **Commit and push** — Stage only `README.md`, commit, and push.
-
-**Finding author X handles**: Check the workflow's `author:` field first. If it's a GitHub username, run `gh api users/<username> --jq '.twitter_username // .bio'` to find their X handle from their GitHub profile.
-
-### README Formatting Conventions
-- All H1 headings (`#`) must have an emoji prefix and a `<br>` tag on the line before them (with a blank line between the `<br>` and the heading)
-- Workflow tables have 3 columns: `Workflow | Schedule | What it does` (and `Author` for community-created)
-- Schedule column shows the time from the workflow's `schedule:` frontmatter field, or "On-demand" if absent
-- The `🏆 Top Contributors` leaderboard uses ranked rows with medal emojis (🥇🥈🥉) plus numbers. The last row is always `🥉 N | [You!](docs/creating-workflows.md) | ?` as a CTA
-- To count workflows per author, use `grep -rl 'author:.*@handle' workflows/available/community/ | wc -l` — don't manually count
-- All workflow authors should be `@davehappyminion` (not `@openclaw`)
+See [docs/merging-workflows.md](docs/merging-workflows.md) for the full step-by-step guide.

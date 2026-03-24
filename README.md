@@ -5,7 +5,7 @@
 </p>
 
 ### The powerful workflow system for OpenClaw
-Including 111 prebuilt workflows you can enable in 1 click 🎉
+Including 112 prebuilt workflows you can enable in 1 click 🎉
 <br/><br/>
 
 Some examples
@@ -273,6 +273,7 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | 🥗 [track-nutrition](workflows/available/community/track-nutrition/WORKFLOW.md) | 7pm | Daily protein + calorie tracking with streak system | [@march_io](https://x.com/march_io) |
 | 📣 [support-friend-announcement](workflows/available/community/support-friend-announcement/WORKFLOW.md) | On-demand | Support a friend's X announcement by liking, reposting, and replying | [@march_io](https://x.com/march_io) |
 | 🔄 [update-openclaw](workflows/available/community/update-openclaw/WORKFLOW.md) | 3am | Daily self-update of OpenClaw — pull latest version and restart | [@davehappyminion](https://x.com/davehappyminion) |
+| ✍️ [learn-writing-style](workflows/available/community/learn-writing-style/WORKFLOW.md) | On-demand | Analyze your writing across email, social, and blog posts to build a personalized style guide | [@nikil](https://x.com/nikil) |
 
 <br>
 
@@ -282,7 +283,8 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 |------|------------|-----------|
 | 🥇 1 | [@davehappyminion](https://x.com/davehappyminion) | 103 |
 | 🥈 2 | [@march_io](https://x.com/march_io) | 8 |
-| 🥉 3 | [You!](#-creating-your-own) | |
+| 🥉 3 | [@nikil](https://x.com/nikil) | 1 |
+| 4 | [You!](#-creating-your-own) | |
 
 <br>
 
