@@ -1,5 +1,9 @@
 # Updates
 
+## Tue, Mar 25
+
+- 🔒 **Path traversal protection** — Workflow names now go through a strict bouncer: letters, numbers, dashes, and underscores only. No more sneaky `../../` trying to escape the banana stand! Every command that accepts a name gets checked, so your filesystem stays safe from rogue traversals. Thanks to [@TerminalsandCoffee](https://github.com/TerminalsandCoffee) for the security report and [@hnshah](https://github.com/hnshah) for the fix! 🍌
+
 ## Thu, Mar 20
 
 - 🐛 **Essentials Pack actually enables now** — The installer was checking `workflows/available/` instead of `workflows/available/community/`, so the 4 essentials never actually got enabled. The banana was in the wrong basket this whole time! 🍌
