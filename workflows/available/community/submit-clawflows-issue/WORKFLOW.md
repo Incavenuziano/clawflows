@@ -1,5 +1,5 @@
 ---
-name: submit-issue
+name: submit-clawflows-issue
 emoji: "🐛"
 description: Submit an issue to the ClawFlows GitHub repo when you encounter a bug or have a feature request.
 author: @nikil

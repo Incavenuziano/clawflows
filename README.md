@@ -260,7 +260,7 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | Workflow | Schedule | What it does |
 |----------|----------|-------------|
 | 🔄 [update-clawflows](workflows/available/community/update-clawflows/WORKFLOW.md) | 9am | Pull latest workflows from GitHub and check for announcements |
-| 🐛 [submit-issue](workflows/available/community/submit-issue/WORKFLOW.md) | On-demand | Submit a bug report or feature request to the ClawFlows GitHub repo |
+| 🐛 [submit-clawflows-issue](workflows/available/community/submit-clawflows-issue/WORKFLOW.md) | On-demand | Submit a bug report or feature request to the ClawFlows GitHub repo |
 
 <br/>
 
