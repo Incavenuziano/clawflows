@@ -413,11 +413,7 @@ Huge shoutout to [Kevin March](https://www.kevinmarch.xyz/) for using ClawFlows 
 
 Thanks to everyone who has contributed to ClawFlows!
 
-| Contributor | Contribution |
-|------------|-------------|
-| [Matt Van Horn](https://github.com/mvanhorn) | `clawflows import` command for URL-based workflow sharing ([#7](https://github.com/nikilster/clawflows/pull/7)) |
-| [Rafael M](https://github.com/TerminalsandCoffee) | Workflow name validation improvements ([#10](https://github.com/nikilster/clawflows/issues/10)) |
-| [hnshah](https://github.com/hnshah) | Workflow name validation and input hardening ([#14](https://github.com/nikilster/clawflows/pull/14)) |
+[kevhelperbot](https://github.com/kevhelperbot) · [Matt Van Horn](https://github.com/mvanhorn) · [Rafael M](https://github.com/TerminalsandCoffee) · [hnshah](https://github.com/hnshah)
 
 Want to contribute? Check out [Creating Your Own Workflows](docs/creating-workflows.md) or open a PR!
 
