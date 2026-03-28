@@ -1,6 +1,6 @@
 ---
 name: plan-workouts
-emoji: 💪
+emoji: "💪"
 description: Weekly exercise planner tailored to your schedule and goals
 schedule: "sunday 7pm"
 author: @davehappyminion

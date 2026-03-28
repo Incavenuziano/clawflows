@@ -1,6 +1,6 @@
 ---
 name: review-month
-emoji: 📊
+emoji: "📊"
 description: Monthly reflection — what went well, what didn't, progress on goals, and adjustments for next month
 author: @davehappyminion
 ---

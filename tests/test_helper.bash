@@ -122,7 +122,7 @@ name: ${name}"
 
     if [[ -n "$emoji" ]]; then
         content="${content}
-emoji: ${emoji}"
+emoji: \"${emoji}\""
     fi
 
     content="${content}
@@ -348,7 +348,7 @@ create_test_backup() {
         cat > "${temp_dir}/custom/${wf}/WORKFLOW.md" << EOF
 ---
 name: ${wf}
-emoji: 📦
+emoji: "📦"
 description: Backup test workflow ${wf}
 ---
 

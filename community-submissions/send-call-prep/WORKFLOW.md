@@ -1,6 +1,6 @@
 ---
 name: send-call-prep
-emoji: 📋
+emoji: "📋"
 description: Pre-meeting briefing 30 minutes before external calls
 author: kevinmarch
 requires:

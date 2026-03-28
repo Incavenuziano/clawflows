@@ -1,6 +1,6 @@
 ---
 name: check-flight-status
-emoji: 🛫
+emoji: "🛫"
 description: Monitor upcoming flights for delays and changes
 schedule: "8am, 12pm, 4pm"
 author: kevinmarch

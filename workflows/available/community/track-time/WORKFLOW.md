@@ -1,6 +1,6 @@
 ---
 name: track-time
-emoji: ⏱️
+emoji: "⏱️"
 description: Daily time audit — quick evening review of how you spent your day with categories and patterns
 schedule: "8pm"
 author: @davehappyminion

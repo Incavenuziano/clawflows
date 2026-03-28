@@ -1,6 +1,6 @@
 ---
 name: stretch-reminder
-emoji: 🧘
+emoji: "🧘"
 description: Movement break reminders with simple stretches during work hours
 schedule: "10am, 2pm, 4pm"
 author: @davehappyminion

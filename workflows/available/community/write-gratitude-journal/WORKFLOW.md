@@ -1,6 +1,6 @@
 ---
 name: write-gratitude-journal
-emoji: 🙏
+emoji: "🙏"
 description: Evening gratitude journal — reflect on 3 good things, what you learned, and who you appreciate
 schedule: "9pm"
 author: @davehappyminion

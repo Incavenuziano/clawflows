@@ -1,6 +1,6 @@
 ---
 name: check-aws-security
-emoji: 🔐
+emoji: "🔐"
 description: Security audit for AWS infrastructure — EC2, security groups, IAM, Secrets Manager, CloudTrail, and Tailscale network access.
 author: kevhelperbot
 schedule: manual

@@ -1,6 +1,6 @@
 ---
 name: check-security
-emoji: 🔒
+emoji: "🔒"
 description: Security hygiene check — verifies system updates, scans open ports, checks encryption and firewall status.
 author: @davehappyminion
 ---

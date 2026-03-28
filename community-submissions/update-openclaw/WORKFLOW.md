@@ -1,6 +1,6 @@
 ---
 name: update-openclaw
-emoji: 🔄
+emoji: "🔄"
 description: Daily self-update of OpenClaw — pull latest version and restart.
 author: davehappyminion @davehappyminion
 schedule: "3am"

@@ -1,6 +1,6 @@
 ---
 name: daily-writing-prompt
-emoji: ✍️
+emoji: "✍️"
 description: A fresh creative writing prompt every morning to spark your imagination
 schedule: "7am"
 author: @davehappyminion

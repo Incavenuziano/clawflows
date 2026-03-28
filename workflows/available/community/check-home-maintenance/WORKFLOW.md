@@ -1,6 +1,6 @@
 ---
 name: check-home-maintenance
-emoji: 🏠
+emoji: "🏠"
 description: Monthly home upkeep reminders so small tasks don't become big problems
 schedule: "1st 9am"
 author: @davehappyminion

@@ -1,6 +1,6 @@
 ---
 name: set-quarterly-goals
-emoji: 🏔️
+emoji: "🏔️"
 description: Quarterly goal-setting — review last quarter, set 3-5 goals with measurable outcomes for the next one
 author: @davehappyminion
 ---

@@ -1,6 +1,6 @@
 ---
 name: check-subscriptions
-emoji: 💳
+emoji: "💳"
 description: Subscription auditor — scans bank statements and email receipts for recurring charges, calculates your total monthly burn, and flags forgotten or suspicious subscriptions.
 author: @davehappyminion
 schedule: "monday 9am"

@@ -1,6 +1,6 @@
 ---
 name: remind-pet-care
-emoji: 🐾
+emoji: "🐾"
 description: Feeding times, medication, vet visits, and grooming reminders for your pets
 schedule: "7am, 6pm"
 author: @davehappyminion

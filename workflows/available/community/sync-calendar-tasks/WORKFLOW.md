@@ -1,6 +1,6 @@
 ---
 name: sync-calendar-tasks
-emoji: 📆
+emoji: "📆"
 description: Calendar task extractor — scans calendar events for action items and suggests tasks to create.
 author: @davehappyminion
 ---

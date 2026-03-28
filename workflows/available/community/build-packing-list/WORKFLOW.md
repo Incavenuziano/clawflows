@@ -1,6 +1,6 @@
 ---
 name: build-packing-list
-emoji: 🧳
+emoji: "🧳"
 description: Generate a smart packing list based on your destination, weather, and activities
 author: @davehappyminion
 ---

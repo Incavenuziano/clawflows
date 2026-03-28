@@ -1,6 +1,6 @@
 ---
 name: your-workflow-name
-emoji: 🔧
+emoji: "🔧"
 description: One-line summary of what this workflow does
 author: your-github-username
 schedule: "9am"  # Optional: when should it run automatically?

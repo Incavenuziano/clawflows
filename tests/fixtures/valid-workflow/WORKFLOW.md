@@ -1,6 +1,6 @@
 ---
 name: valid-workflow
-emoji: 🧪
+emoji: "🧪"
 description: A valid test workflow for automated testing
 schedule: "9am"
 author: @test

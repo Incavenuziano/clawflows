@@ -1,6 +1,6 @@
 ---
 name: sync-bookmarks
-emoji: 🔖
+emoji: "🔖"
 description: Bookmark maintenance — checks bookmarks for dead links, removes duplicates, and organizes by topic.
 author: @davehappyminion
 ---

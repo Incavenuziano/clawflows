@@ -16,9 +16,9 @@ setup() {
 }
 
 teardown() {
-    # Kill any leftover server processes
+    # Kill the dashboard process and its child node server via process group
     if [[ -n "${DASHBOARD_PID:-}" ]]; then
-        kill "$DASHBOARD_PID" 2>/dev/null || true
+        kill -- -"$DASHBOARD_PID" 2>/dev/null || kill "$DASHBOARD_PID" 2>/dev/null || true
         wait "$DASHBOARD_PID" 2>/dev/null || true
     fi
     teardown_test_environment
@@ -250,9 +250,12 @@ start_dashboard_server() {
     export DASHBOARD_PORT="$port"
     export DASHBOARD_NO_OPEN=1
 
-    # Start dashboard in background, capture output
+    # Start dashboard in its own process group so teardown can kill
+    # both the bash wrapper and the child node server via kill -- -PID
+    set -m
     "$TEST_CLI" dashboard > "${TEST_TMPDIR}/dashboard-out.txt" 2>&1 &
     DASHBOARD_PID=$!
+    set +m
 
     # Wait for server to start (look for URL in output)
     local attempts=0

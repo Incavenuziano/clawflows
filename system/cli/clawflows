@@ -233,7 +233,7 @@ _create_from_json() {
   # Build the WORKFLOW.md content
   local workflow_content="---
 name: $name
-emoji: $emoji
+emoji: \"$emoji\"
 description: $summary"
 
   if [ -n "$schedule" ]; then
@@ -360,7 +360,7 @@ cmd_create() {
   # Build content
   local workflow_content="---
 name: $name
-emoji: $emoji
+emoji: \"$emoji\"
 description: $summary"
 
   if [ -n "$schedule" ]; then

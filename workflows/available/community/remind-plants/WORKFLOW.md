@@ -1,6 +1,6 @@
 ---
 name: remind-plants
-emoji: 🌱
+emoji: "🌱"
 description: Plant watering schedule based on your plants and the season
 schedule: "8am"
 author: @davehappyminion

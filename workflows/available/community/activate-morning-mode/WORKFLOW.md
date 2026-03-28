@@ -1,6 +1,6 @@
 ---
 name: activate-morning-mode
-emoji: 🌅
+emoji: "🌅"
 description: Morning mode — bright warm lighting, comfortable thermostat, and energizing music to start the day.
 author: @davehappyminion
 ---

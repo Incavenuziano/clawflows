@@ -1,6 +1,6 @@
 ---
 name: plan-trip
-emoji: ✈️
+emoji: "✈️"
 description: Research and plan a trip with flights, hotels, activities, and a day-by-day itinerary
 author: @davehappyminion
 ---

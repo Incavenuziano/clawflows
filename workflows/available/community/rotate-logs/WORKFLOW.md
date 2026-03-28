@@ -1,6 +1,6 @@
 ---
 name: rotate-logs
-emoji: 📜
+emoji: "📜"
 description: Log rotation and hygiene — checks log files across projects and system locations, archives old logs, flags fast-growing files, and reports disk usage.
 author: @davehappyminion
 ---

@@ -1,6 +1,6 @@
 ---
 name: update-clawflows
-emoji: 🔄
+emoji: "🔄"
 description: Pull the latest ClawFlows workflows and notify user of any announcements
 author: @davehappyminion
 schedule: "1am"

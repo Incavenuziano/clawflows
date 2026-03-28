@@ -1,6 +1,6 @@
 ---
 name: build-trip-prep
-emoji: ✈️
+emoji: "✈️"
 description: Comprehensive trip preparation packet
 author: kevinmarch
 requires:

@@ -1,6 +1,6 @@
 ---
 name: clear-open-tabs
-emoji: 🧹
+emoji: "🧹"
 description: Browser tab cleanup — lists open tabs, bookmarks the keepers, closes the stale ones, fresh start
 author: @davehappyminion
 ---

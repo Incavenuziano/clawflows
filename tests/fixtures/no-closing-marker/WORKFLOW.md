@@ -1,6 +1,6 @@
 ---
 name: no-closing-marker
-emoji: 🧪
+emoji: "🧪"
 description: This workflow is missing the closing YAML marker
 
 # No Closing Marker

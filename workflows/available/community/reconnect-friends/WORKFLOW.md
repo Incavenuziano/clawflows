@@ -1,6 +1,6 @@
 ---
 name: reconnect-friends
-emoji: 👋
+emoji: "👋"
 description: Weekly nudge to reach out to friends you haven't talked to in a while
 schedule: "sunday 10am"
 author: @davehappyminion

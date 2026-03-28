@@ -1,6 +1,6 @@
 ---
 name: prep-event
-emoji: 🎉
+emoji: "🎉"
 description: Get ready for any upcoming event — what to wear, bring, know, and expect
 author: @davehappyminion
 ---

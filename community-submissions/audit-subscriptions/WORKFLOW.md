@@ -1,6 +1,6 @@
 ---
 name: audit-subscriptions
-emoji: 💳
+emoji: "💳"
 description: Weekly audit of subscriptions, bills, and receipts from email
 schedule: "9am monday"
 author: kevinmarch

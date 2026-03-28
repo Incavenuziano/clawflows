@@ -1,6 +1,6 @@
 ---
 name: review-passwords
-emoji: 🔐
+emoji: "🔐"
 description: Password hygiene check — flags weak, reused, or old passwords, checks for breached credentials, and helps you prioritize which ones to update first.
 author: @davehappyminion
 ---

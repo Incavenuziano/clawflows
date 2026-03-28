@@ -1,6 +1,6 @@
 ---
 name: activate-focus-mode
-emoji: 🧘
+emoji: "🧘"
 description: Focus mode — bright daylight lighting, mutes speakers, and blocks distracting websites.
 author: @davehappyminion
 ---

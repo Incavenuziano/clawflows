@@ -1,6 +1,6 @@
 ---
 name: check-warranties
-emoji: 🛡️
+emoji: "🛡️"
 description: Tracks warranties and return windows for recent purchases — alerts you before they expire
 schedule: "monday 9am"
 author: @davehappyminion

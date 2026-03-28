@@ -87,7 +87,7 @@ EOF
     cat > "${COMMUNITY_DIR}/colon-desc/WORKFLOW.md" << 'EOF'
 ---
 name: colon-desc
-emoji: 🔧
+emoji: "🔧"
 description: Schedule: 9am, 5pm
 ---
 
@@ -106,7 +106,7 @@ EOF
     cat > "${COMMUNITY_DIR}/emoji-test/WORKFLOW.md" << 'EOF'
 ---
 name: emoji-test
-emoji: 🎉🎊✨
+emoji: "🎉🎊✨"
 description: Celebration workflow
 ---
 

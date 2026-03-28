@@ -1,6 +1,6 @@
 ---
 name: check-weather-alerts
-emoji: 🌦️
+emoji: "🌦️"
 description: Proactive weather alerts tied to your calendar — cross-references the forecast with your schedule to deliver actionable, context-aware weather warnings.
 author: @davehappyminion
 schedule: "7am, 3pm"

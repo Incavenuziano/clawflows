@@ -1,6 +1,6 @@
 ---
 name: build-changelog
-emoji: 📝
+emoji: "📝"
 description: Changelog generator — creates a formatted changelog from git history since the last tag or release.
 author: @davehappyminion
 ---

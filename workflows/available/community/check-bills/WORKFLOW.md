@@ -1,6 +1,6 @@
 ---
 name: check-bills
-emoji: 🧾
+emoji: "🧾"
 description: Bill monitor — scans email for upcoming bills and due dates, flags unusual amounts or spikes, and makes sure nothing gets missed before it's due.
 author: @davehappyminion
 schedule: "monday 8am"

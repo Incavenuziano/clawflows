@@ -1,6 +1,6 @@
 ---
 name: clean-email
-emoji: 📧
+emoji: "📧"
 description: Inbox cleanup assistant — finds newsletters you never read, promotional emails piling up, and old threads, then suggests unsubscribes and archive actions.
 author: @davehappyminion
 ---

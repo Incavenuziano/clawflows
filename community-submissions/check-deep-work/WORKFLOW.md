@@ -1,6 +1,6 @@
 ---
 name: check-deep-work
-emoji: 🧘
+emoji: "🧘"
 description: Protect deep work days from meeting creep
 schedule: "8am"
 author: kevinmarch

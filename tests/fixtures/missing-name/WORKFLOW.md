@@ -1,5 +1,5 @@
 ---
-emoji: 🧪
+emoji: "🧪"
 description: This workflow is missing the name field
 ---
 

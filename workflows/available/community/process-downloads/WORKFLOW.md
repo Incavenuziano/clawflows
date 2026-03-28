@@ -1,6 +1,6 @@
 ---
 name: process-downloads
-emoji: 📥
+emoji: "📥"
 description: Downloads folder cleanup — organizes files by type, removes duplicates, and archives old downloads.
 author: @davehappyminion
 ---

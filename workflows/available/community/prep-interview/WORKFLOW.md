@@ -1,6 +1,6 @@
 ---
 name: prep-interview
-emoji: 💼
+emoji: "💼"
 description: Research a company before a job interview. Pull recent news, company info, interviewer profiles, and common questions for the role. Delivers a complete prep packet.
 author: @davehappyminion
 ---

@@ -1,6 +1,6 @@
 ---
 name: learn-writing-style
-emoji: ✍️
+emoji: "✍️"
 description: Analyze the user's writing across email, social media, and blog posts to build a personalized writing style guide.
 author: nikilster @nikil
 ---

@@ -1,6 +1,6 @@
 ---
 name: check-school-events
-emoji: 🎒
+emoji: "🎒"
 description: Weekly parent briefing on upcoming school events, deadlines, and schedule changes
 schedule: "monday 8am"
 author: @davehappyminion

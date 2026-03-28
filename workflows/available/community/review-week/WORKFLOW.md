@@ -1,6 +1,6 @@
 ---
 name: review-week
-emoji: 📋
+emoji: "📋"
 description: Weekly life review — summarizes your calendar, meetings, tasks, and personal goals into a clear end-of-week reflection.
 author: @davehappyminion
 schedule: "friday 5pm"

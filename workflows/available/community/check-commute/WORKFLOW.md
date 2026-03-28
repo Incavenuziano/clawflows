@@ -1,6 +1,6 @@
 ---
 name: check-commute
-emoji: 🚗
+emoji: "🚗"
 description: Morning commute briefing with traffic, transit delays, weather, and best departure time
 schedule: "7am"
 author: @davehappyminion

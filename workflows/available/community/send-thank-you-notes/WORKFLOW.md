@@ -1,6 +1,6 @@
 ---
 name: send-thank-you-notes
-emoji: 💌
+emoji: "💌"
 description: Helps you write and send thoughtful thank-you messages after events, gifts, or favors
 author: @davehappyminion
 ---

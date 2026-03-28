@@ -1,6 +1,6 @@
 ---
 name: check-follow-ups
-emoji: 🔔
+emoji: "🔔"
 description: Follow-up checker — scans for unanswered emails, promises you made, and things about to slip through the cracks.
 author: @davehappyminion
 schedule: "9am, 4pm"

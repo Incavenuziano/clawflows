@@ -1,6 +1,6 @@
 ---
 name: draft-social-posts
-emoji: 📱
+emoji: "📱"
 description: Generate a week's worth of social media content based on your recent work, blog posts, or interests. Presents drafts for review — never posts automatically.
 author: @davehappyminion
 ---

@@ -103,7 +103,7 @@ teardown() {
 
     assert_success
     run cat "${CUSTOM_DIR}/emoji-wf/WORKFLOW.md"
-    assert_output --partial "emoji: 🚀"
+    assert_output --partial 'emoji: "🚀"'
 }
 
 @test "create --from-json: defaults emoji to wrench if not provided" {
@@ -113,7 +113,7 @@ teardown() {
 
     assert_success
     run cat "${CUSTOM_DIR}/no-emoji/WORKFLOW.md"
-    assert_output --partial "emoji: 🔧"
+    assert_output --partial 'emoji: "🔧"'
 }
 
 @test "create --from-json: includes author when provided" {

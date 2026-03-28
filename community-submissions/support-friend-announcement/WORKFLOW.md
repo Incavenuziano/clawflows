@@ -1,6 +1,6 @@
 ---
 name: support-friend-announcement
-emoji: 📣
+emoji: "📣"
 description: Support a friend's X announcement by liking, reposting, and replying, then report proof. Use when the user drops in an X/Twitter post URL and wants the connected account to help amplify it. Keep the reply short, positive, and generic. Never include private or sensitive information about the user, their company, clients, internal strategy, or non-public relationships.
 ---
 

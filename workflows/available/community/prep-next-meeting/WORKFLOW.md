@@ -1,6 +1,6 @@
 ---
 name: prep-next-meeting
-emoji: 🔍
+emoji: "🔍"
 description: Meeting prep — researches attendees, pulls context from past meetings and emails, and generates talking points before your next meeting.
 author: @davehappyminion
 schedule: "every 30 minutes"

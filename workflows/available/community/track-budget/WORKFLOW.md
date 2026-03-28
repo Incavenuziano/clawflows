@@ -1,6 +1,6 @@
 ---
 name: track-budget
-emoji: 💰
+emoji: "💰"
 description: Weekly spending check — scans receipts and bank notifications to see where your money went
 schedule: "friday 6pm"
 author: @davehappyminion

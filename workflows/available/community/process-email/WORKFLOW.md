@@ -1,6 +1,6 @@
 ---
 name: process-email
-emoji: 📧
+emoji: "📧"
 description: Email processing — auto-unsubscribes from newsletters, archives mailing lists, and gives you a clean summary of what actually needs attention.
 author: @davehappyminion
 schedule: "9am, 1pm, 5pm"

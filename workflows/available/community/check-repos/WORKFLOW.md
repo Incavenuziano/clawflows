@@ -1,6 +1,6 @@
 ---
 name: check-repos
-emoji: 🔍
+emoji: "🔍"
 description: Git repo health check — scans local repos for uncommitted changes, stale branches, and unpushed commits.
 author: @davehappyminion
 ---

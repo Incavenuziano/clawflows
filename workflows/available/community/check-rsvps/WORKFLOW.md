@@ -1,6 +1,6 @@
 ---
 name: check-rsvps
-emoji: 📨
+emoji: "📨"
 description: Finds event invitations in your email that still need a response
 schedule: "monday 9am, friday 9am"
 author: @davehappyminion

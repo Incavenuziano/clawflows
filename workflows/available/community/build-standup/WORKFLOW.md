@@ -1,6 +1,6 @@
 ---
 name: build-standup
-emoji: 🧍
+emoji: "🧍"
 description: Standup generator — automatically creates your daily standup update from git commits, completed tasks, and today's plan.
 author: @davehappyminion
 schedule: "9am"

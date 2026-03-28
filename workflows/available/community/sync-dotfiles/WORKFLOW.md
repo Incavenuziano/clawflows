@@ -1,6 +1,6 @@
 ---
 name: sync-dotfiles
-emoji: 📦
+emoji: "📦"
 description: Dotfiles backup — commits dotfiles and package manager config to a git repo for safekeeping.
 author: @davehappyminion
 ---

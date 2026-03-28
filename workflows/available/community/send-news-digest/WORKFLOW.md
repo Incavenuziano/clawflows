@@ -1,6 +1,6 @@
 ---
 name: send-news-digest
-emoji: 📰
+emoji: "📰"
 description: Curated news digest — gathers news on topics you care about and delivers a concise summary via messaging.
 author: @davehappyminion
 schedule: "7am"

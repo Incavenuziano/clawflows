@@ -1,5 +1,10 @@
 # Updates
 
+## Fri, Mar 28
+
+- 🎯 **Quoted emoji in frontmatter** — All `emoji:` values in WORKFLOW.md files are now wrapped in quotes so GitHub stops showing that angry red YAML error banner. The CLI already stripped quotes on read, so nothing changes for users — just GitHub being picky about its bananas! Thanks to [@justinhuangcode](https://github.com/justinhuangcode) for spotting it 🍌
+- 🧪 **Dashboard test cleanup fix** — Dashboard server tests now properly kill child node processes on teardown using process groups, so tests don't hang from orphaned servers piling up like uneaten bananas 🍌
+
 ## Tue, Mar 25
 
 - 🔒 **Path traversal protection** — Workflow names now go through a strict bouncer: letters, numbers, dashes, and underscores only. No more sneaky `../../` trying to escape the banana stand! Every command that accepts a name gets checked, so your filesystem stays safe from rogue traversals. Thanks to [@TerminalsandCoffee](https://github.com/TerminalsandCoffee) for the security report and [@hnshah](https://github.com/hnshah) for the fix! 🍌

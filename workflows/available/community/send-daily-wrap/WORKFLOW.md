@@ -1,6 +1,6 @@
 ---
 name: send-daily-wrap
-emoji: 🌆
+emoji: "🌆"
 description: Daily wrap-up — summarizes what you accomplished today from git, tasks, and calendar, then previews tomorrow.
 author: @davehappyminion
 schedule: "6pm"

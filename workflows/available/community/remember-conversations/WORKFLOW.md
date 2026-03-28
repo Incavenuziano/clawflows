@@ -1,6 +1,6 @@
 ---
 name: remember-conversations
-emoji: 🧠
+emoji: "🧠"
 description: Log key takeaways, promises, and personal details from conversations and meetings
 author: @davehappyminion
 ---

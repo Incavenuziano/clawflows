@@ -82,7 +82,7 @@ Agent: "Here's your new workflow:
 
 ---
 name: remind-to-stretch
-emoji: 🧘
+emoji: "🧘"
 description: Stretch reminders during work hours
 schedule: "9am, 11am, 1pm, 3pm, 5pm"
 ---
@@ -121,7 +121,7 @@ The only required file is `WORKFLOW.md`. Scripts and config are optional — mos
 ```yaml
 ---
 name: send-morning-briefing
-emoji: ☀️
+emoji: "☀️"
 description: Daily morning briefing — gathers weather, calendar, priorities, and news into one summary.
 author: nikilster @nikil
 schedule: "7am"
