@@ -407,6 +407,19 @@ https://github.com/nikilster/clawflows
 
 Huge shoutout to [Kevin March](https://www.kevinmarch.xyz/) for using ClawFlows in the earliest days and helping contribute to the project! Also huge appreciate to everyone who has given me feedback including everyone at [Alchemy](https://www.alchemy.com/)! Sam, MC, Ben B, [Dave Morin](https://x.com/davemorin), Guillaume, Sahil, Ben Yu, Flor & more)! ❤️🙏
 
+<br>
+
+# 🛠️ Contributors
+
+Thanks to everyone who has contributed to ClawFlows!
+
+| Contributor | Contribution |
+|------------|-------------|
+| [Matt Van Horn](https://github.com/mvanhorn) | `clawflows import` command for URL-based workflow sharing ([#7](https://github.com/nikilster/clawflows/pull/7)) |
+| [Rafael M](https://github.com/TerminalsandCoffee) | Security vulnerability report — path traversal and arbitrary deletion ([#10](https://github.com/nikilster/clawflows/issues/10)) |
+| [hnshah](https://github.com/hnshah) | Path traversal security fix with comprehensive hardening ([#14](https://github.com/nikilster/clawflows/pull/14)) |
+
+Want to contribute? Check out [Creating Your Own Workflows](docs/creating-workflows.md) or open a PR!
 
 ## License
 
