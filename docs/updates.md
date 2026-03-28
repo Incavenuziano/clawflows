@@ -1,5 +1,9 @@
 # Updates
 
+## Sat, Mar 28
+
+- 🟢 **Fixed CI tests for `submit`** — The `submit` command was `die`-ing when it couldn't detect a GitHub remote or username, even though the workflow was already copied successfully. Now those PR automation failures are warnings, not fatal errors — because the banana is already in the basket, we just couldn't mail it yet! CI goes green for the first time in 5 commits 🍌
+
 ## Fri, Mar 28
 
 - 📋 **Post-update release notes** — `clawflows update` now shows you what's new! After pulling the latest, it diffs `docs/updates.md` and prints any new entries right in your terminal. No more updating blindly — now you know exactly which bananas just landed in the basket! 🍌

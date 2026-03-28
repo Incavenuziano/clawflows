@@ -655,12 +655,43 @@ cmd_open() {
 
 cmd_update() {
   echo "Updating clawflows..."
+
+  # Capture current updates.md content before pulling
+  local updates_file="$CLAWFLOWS_DIR/docs/updates.md"
+  local old_updates=""
+  if [ -f "$updates_file" ]; then
+    old_updates="$(cat "$updates_file")"
+  fi
+
   if git -C "$CLAWFLOWS_DIR" pull --ff-only --quiet 2>/dev/null; then
     echo "Updated to latest version."
   else
     echo "Could not update (offline or local changes). Try: git -C $CLAWFLOWS_DIR pull"
     return 1
   fi
+
+  # Show what's new by diffing updates.md
+  if [ -f "$updates_file" ]; then
+    local new_updates
+    new_updates="$(cat "$updates_file")"
+    if [ "$old_updates" != "$new_updates" ] && [ -n "$old_updates" ]; then
+      # Extract lines that are new (present in new but not in old)
+      local new_lines
+      new_lines="$(diff <(echo "$old_updates") <(echo "$new_updates") | grep '^> ' | sed 's/^> //' || true)"
+      # Filter to just the bullet point entries (skip headings and blank lines)
+      local entries
+      entries="$(echo "$new_lines" | grep '^- ' || true)"
+      if [ -n "$entries" ]; then
+        echo ""
+        echo "What's new:"
+        echo "$entries"
+      fi
+    elif [ -z "$old_updates" ]; then
+      echo ""
+      echo "Release notes available at: docs/updates.md"
+    fi
+  fi
+
   cmd_sync
   echo ""
   echo "IMPORTANT: Re-read your AGENTS.md file now to pick up any new instructions or workflows."
@@ -1311,7 +1342,7 @@ cmd_submit() {
   # Check gh auth
   if ! gh auth status &>/dev/null; then
     echo "  ⚠️  gh CLI not authenticated. Run: gh auth login"
-    return 1
+    return
   fi
 
   # Get the upstream repo (owner/name) from origin
@@ -1322,14 +1353,17 @@ cmd_submit() {
     upstream_repo="${BASH_REMATCH[1]}"
   fi
   if [ -z "$upstream_repo" ]; then
-    die "could not detect upstream repo from origin URL: $origin_url"
+    echo "  ⚠️  Could not detect upstream repo from origin URL."
+    echo "  Submit manually: https://github.com/nikilster/clawflows/compare"
+    return
   fi
 
   # Get current gh user
   local gh_user
   gh_user="$(gh api user --jq '.login' 2>/dev/null || true)"
   if [ -z "$gh_user" ]; then
-    die "could not detect GitHub username. Run: gh auth login"
+    echo "  ⚠️  Could not detect GitHub username. Run: gh auth login"
+    return
   fi
 
   local upstream_owner="${upstream_repo%%/*}"
