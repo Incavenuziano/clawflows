@@ -7,9 +7,7 @@
 ### The powerful workflow system for OpenClaw
 Including 112 prebuilt workflows you can enable in 1 click 🎉
 
-<p align="center">
-  <a href="https://clawflows.ai">🌐 Website</a> · <a href="https://github.com/nikilster/clawflows/blob/main/docs/updates.md">📋 What's New</a>
-</p>
+[🌐 Website](https://clawflows.ai) · [📋 What's New](https://github.com/nikilster/clawflows/blob/main/docs/updates.md)
 
 Some examples
 - 📧 **Process my email** (9am, 1pm, 5pm) — Junk unsubscribed, noise archived, important stuff summarized. Your inbox, handled.
