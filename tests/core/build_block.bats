@@ -45,6 +45,36 @@ teardown() {
 }
 
 # ============================================================================
+# After Enabling Section (Service Dependency Check)
+# ============================================================================
+
+@test "build_block: includes after enabling section" {
+    run_clawflows sync-agent
+
+    assert_success
+    run cat "$AGENTS_MD"
+    assert_output --partial "### After Enabling or Creating a Workflow"
+}
+
+@test "build_block: instructs agent to check for skill references" {
+    run_clawflows sync-agent
+
+    assert_success
+    run cat "$AGENTS_MD"
+    assert_output --partial "**X skill**"
+    assert_output --partial "**email skill**"
+}
+
+@test "build_block: distinguishes essential vs optional services" {
+    run_clawflows sync-agent
+
+    assert_success
+    run cat "$AGENTS_MD"
+    assert_output --partial "essential"
+    assert_output --partial "optional"
+}
+
+# ============================================================================
 # Simple Workflow Guidance
 # ============================================================================
 

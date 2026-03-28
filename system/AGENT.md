@@ -20,6 +20,8 @@ Run `clawflows list available` to see all 50+ workflows. Ask the user what they'
 clawflows enable <name>
 ```
 
+After enabling each workflow, read its WORKFLOW.md and check what services it references (look for `**X skill**` patterns like `**email skill**`, `**calendar skill**`, etc.). If the user is missing a service the workflow needs, let them know — offer to help install it if it's essential, or mention it'll still work without it if it's optional.
+
 Then summarize what was set up — which workflows are enabled, which run on a schedule (automatically) vs on-demand (when they ask). Let them know they don't need to remember any commands — they just talk to you naturally:
 
 - **"Check my email"** — you'll run the email workflow
