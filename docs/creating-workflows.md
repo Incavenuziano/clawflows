@@ -44,13 +44,13 @@ This command creates the workflow, **auto-enables it**, and syncs AGENTS.md. You
 
 #### JSON Fields
 
-| Field | Required | Example |
-|-------|----------|---------|
-| `name` | Yes | `remind-to-stretch` (you pick this — lowercase, hyphenated) |
-| `emoji` | No | `🧘` (you pick this — default: 🔧) |
-| `summary` | Yes | One-line description |
-| `schedule` | No | `"9am"` or `"9am, 5pm"` — omit for on-demand |
-| `description` | Yes | What the workflow should do |
+| Field | Required | Example | Validation |
+|-------|----------|---------|------------|
+| `name` | Yes | `remind-to-stretch` (you pick this — lowercase, hyphenated) | Must start with letter/number, only letters/numbers/dashes/underscores, no dots, max 64 chars |
+| `emoji` | No | `🧘` (you pick this — default: 🔧) | Any valid emoji |
+| `summary` | Yes | One-line description | Free text |
+| `schedule` | No | `"9am"` or `"9am, 5pm"` — omit for on-demand | Cron or time format |
+| `description` | Yes | What the workflow should do | Free text |
 
 ### Step 3: Show It and Ask for Edits
 
