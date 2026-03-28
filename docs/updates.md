@@ -2,6 +2,8 @@
 
 ## Fri, Mar 28
 
+- 🐛 **New submit-issue workflow** — Your agent can now file GitHub issues on ClawFlows when it hits a bug or has an idea. Gathers context, checks for duplicates, and submits via `gh`. The bananas are finally reporting their own bruises! 🍌
+- 🔧 **Fixed curl-pipe install for agents** — Wrapped the installer in a `main()` function and added `</dev/null` to git commands so `curl | bash` can't get its stdin eaten mid-script. No more mysterious missing symlinks when your agent installs ClawFlows — the whole banana gets downloaded before anyone takes a bite! 🍌
 - 🎯 **Quoted emoji in frontmatter** — All `emoji:` values in WORKFLOW.md files are now wrapped in quotes so GitHub stops showing that angry red YAML error banner. The CLI already stripped quotes on read, so nothing changes for users — just GitHub being picky about its bananas! Thanks to [@justinhuangcode](https://github.com/justinhuangcode) for spotting it 🍌
 - 🧪 **Dashboard test cleanup fix** — Dashboard server tests now properly kill child node processes on teardown using process groups, so tests don't hang from orphaned servers piling up like uneaten bananas 🍌
 - 📥 **Import command** — `clawflows import <url>` lets you install any workflow from a URL. Supports GitHub raw URLs, blob URLs (auto-converts), and gists. Download, validate, save to custom, done. The sharing banana just got way more portable! Thanks to [@mvanhorn](https://github.com/mvanhorn) for the contribution! 🍌

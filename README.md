@@ -5,7 +5,7 @@
 </p>
 
 ### The powerful workflow system for OpenClaw
-Including 112 prebuilt workflows you can enable in 1 click 🎉
+Including 113 prebuilt workflows you can enable in 1 click 🎉
 
 [🌐 Website](https://clawflows.ai) · [📋 What's New](https://github.com/nikilster/clawflows/blob/main/docs/updates.md)
 
@@ -258,6 +258,7 @@ Install https://raw.githubusercontent.com/nikilster/clawflows/main/system/AGENT.
 | Workflow | Schedule | What it does |
 |----------|----------|-------------|
 | 🔄 [update-clawflows](workflows/available/community/update-clawflows/WORKFLOW.md) | 9am | Pull latest workflows from GitHub and check for announcements |
+| 🐛 [submit-issue](workflows/available/community/submit-issue/WORKFLOW.md) | On-demand | Submit a bug report or feature request to the ClawFlows GitHub repo |
 
 <br/>
 
