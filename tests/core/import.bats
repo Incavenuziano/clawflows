@@ -222,27 +222,3 @@ EOF
     grep -q "New version" "${CUSTOM_DIR}/overwrite-wf/WORKFLOW.md"
 }
 
-# ============================================================================
-# Share Output
-# ============================================================================
-
-@test "share: community workflow outputs import command with install hint" {
-    create_community_workflow "share-test" "x" "A shareable workflow"
-
-    run_clawflows share share-test
-    assert_success
-    assert_output --partial "clawflows import"
-    assert_output --partial "raw.githubusercontent.com"
-    assert_output --partial "share-test"
-    assert_output --partial "Need ClawFlows?"
-    assert_output --partial "install.sh"
-}
-
-@test "share: custom workflow shows upload instructions" {
-    create_custom_workflow "custom-share" "x" "A custom workflow"
-
-    run_clawflows share custom-share
-    assert_success
-    assert_output --partial "upload WORKFLOW.md"
-    assert_output --partial "clawflows import <your-url>"
-}

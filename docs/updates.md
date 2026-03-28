@@ -4,6 +4,7 @@
 
 - 🎯 **Quoted emoji in frontmatter** — All `emoji:` values in WORKFLOW.md files are now wrapped in quotes so GitHub stops showing that angry red YAML error banner. The CLI already stripped quotes on read, so nothing changes for users — just GitHub being picky about its bananas! Thanks to [@justinhuangcode](https://github.com/justinhuangcode) for spotting it 🍌
 - 🧪 **Dashboard test cleanup fix** — Dashboard server tests now properly kill child node processes on teardown using process groups, so tests don't hang from orphaned servers piling up like uneaten bananas 🍌
+- 📥 **Import command** — `clawflows import <url>` lets you install any workflow from a URL. Supports GitHub raw URLs, blob URLs (auto-converts), and gists. Download, validate, save to custom, done. The sharing banana just got way more portable! Thanks to [@mvanhorn](https://github.com/mvanhorn) for the contribution! 🍌
 
 ## Tue, Mar 25
 
@@ -11,8 +12,6 @@
 
 ## Thu, Mar 20
 
-- 📥 **Import command** — `clawflows import <url>` lets you install any workflow from a URL. Supports GitHub raw URLs, blob URLs (auto-converts), and gists. Download, validate, save to custom, done. The sharing banana just got way more portable! 🍌
-- 📤 **Share outputs import command** — `clawflows share` now generates a `clawflows import` one-liner instead of the full install script. Share a workflow, friend imports it with one command. The circle of banana life! 🍌
 - 🐛 **Essentials Pack actually enables now** — The installer was checking `workflows/available/` instead of `workflows/available/community/`, so the 4 essentials never actually got enabled. The banana was in the wrong basket this whole time! 🍌
 - ✨ **Try-it-now suggests morning inspiration** — Changed the post-install "Try It Now" suggestion from `check-calendar` to `send-morning-inspiration` — works without any services configured, so new users get instant gratification! 🍌
 - 💬 **Friendlier enable messages** — `clawflows enable` now shows the emoji, description, and schedule instead of debug-style output. You'll know exactly what you just turned on and when it runs! 🍌
