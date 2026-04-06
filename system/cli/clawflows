@@ -1634,7 +1634,9 @@ cmd_run() {
   if [ -n "$oc" ]; then
     echo "Running $name — check your chat with your agent for results."
     echo ""
-    "$oc" agent --agent main -m "Run the $name workflow by following $wf_file" | tee "$run_file"
+    local cf_agent
+    cf_agent="${CLAWFLOWS_OPENCLAW_AGENT:-main}"
+    "$oc" agent --agent "$cf_agent" -m "Run the $name workflow by following $wf_file" | tee "$run_file"
   else
     echo ""
     echo "  ✓ Workflow ready: $name"
