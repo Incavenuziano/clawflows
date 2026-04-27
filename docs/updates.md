@@ -1,5 +1,9 @@
 # Updates
 
+## Sun, Apr 27
+
+- 📖 **ClaudeClaw Best Practices Manual** — The complete guide to building an autonomous agent on your own server using Claude Max. 12 sections covering quota management (the secret: only LLM calls cost, bash=free), memory with claude-mem (FTS5 + Chroma for semantic recall), daemon operation, security guardrails, reversibility-by-design, observability, testing, and incident response. Everything you need to run a self-hosted agent that respects limits and doesn't go rogue. The banana finally has an instruction manual! 🍌
+
 ## Sat, Mar 28
 
 - 🟢 **Fixed CI tests for `submit`** — The `submit` command was `die`-ing when it couldn't detect a GitHub remote or username, even though the workflow was already copied successfully. Now those PR automation failures are warnings, not fatal errors — because the banana is already in the basket, we just couldn't mail it yet! CI goes green for the first time in 5 commits 🍌
